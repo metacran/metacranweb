@@ -4,19 +4,47 @@
    Author's custom styles
    ========================================================================== */
 
+.page-header {
+    color: #f00;
+}
 
+.jumbotron {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
 
+@media (min-width: 1200px) {
+    .logo {
+	width: 200px;
+	height: auto;
+    }
+}
 
+@media (max-width: 1199px) {
+    .logo {
+	width: 140px;
+	height: auto;
+    }
+}
 
+@media (min-width: 1200px) {
+    .search-form {
+	padding-top:40px;
+    }
+}
 
+@media (max-width: 1199px) {
+    .search-form {
+	padding-top:15px;
+    }
+}
 
+@media (min-width: 1200px) {
+    .container {
+	width: 80%;
+    }
+}
 
-
-
-
-
-
-
-
-
-
+h3 {
+    margin-bottom: 20px;
+}
