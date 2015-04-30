@@ -81,9 +81,11 @@ function do_query(res, package, query) {
 
 function make_badge(res, message, query) {
 
+    var def_color = "brightgreen";
+    if (message == "not published") def_color = "red"
     var len = message.length;
     var no_dots = (message.match(/\./g) || []).length
-    var color = query['color'] || 'brightgreen';
+    var color = query['color'] || def_color;
     color = svg_colors[color] || color;
     var width = 53 + 7 * len - 3 * no_dots;
     var textwidth = 47 + 3.5 * len - 1.5 * no_dots;
