@@ -1,0 +1,15 @@
+<div class="package">
+  <p>
+    <span class="packagetitle">
+      <a href="/pkg/<%= pkg.Package %>"><%= pkg.Package %></a>
+    </span>
+    <span class="packageauthor">
+      &mdash; by <%= pkg.Maintainer %>, <%= pkg.timeago %>
+    </span>
+  </p>
+  <div class="packagedesc">
+    <p class="alphatitle"><%= pkg.Title %></p>
+    <p class="description"><%- pkg.Description %></p>
+  </div>
+  <div class="packageurl"><%- pkg.URL %></div>
+</div>

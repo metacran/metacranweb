@@ -48,3 +48,45 @@
 h3 {
     margin-bottom: 20px;
 }
+
+.alphatitle {
+    color: #222;
+    font-size: 90%;
+    line-height: 100%;
+}
+
+p.alphatitle {
+    margin-bottom: 5px;
+}
+
+.description {
+    color: #555;
+    font-size: 80%;
+    margin-bottom: 5px;
+}
+
+.package {
+    margin-bottom: 40px;
+    font-size: 140%;
+}
+
+.packagetitle {
+    font-size: 140%;
+    color: "#00f";
+}
+
+.packageauthor {
+    color: #888;
+    font-style: italic;
+    font-size: 90%;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.packagedesc {
+    clear: both;
+}
+
+.packageurl {
+    font-size: 75%;
+}

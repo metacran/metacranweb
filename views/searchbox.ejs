@@ -2,7 +2,7 @@
 <div class="jumbotron">
   <div class="row">
     <div class="col-md-2 col-md-offset-1 hidden-xs hidden-sm">
-      <img src="/img/metacran-logo.svg" alt="" class="logo">
+      <a href="/"><img src="/img/metacran-logo.svg" alt="" class="logo"></a>
     </div>
     <div class="col-md-8">
       <p class="search-form">
@@ -11,7 +11,11 @@
 	  <div class="input-group">
 	    <input class="form-control input-lg" id="cran-input"
 		   autofocus="autofocus"
-		   placeholder="Search for a package name, keywords, people" name="q">
+		   <% if (typeof q !== 'undefined') { %>
+		     value="<%= q %>"
+		   <% } %>
+		   placeholder="Search for a package name, keywords, people"
+		   name="q">
 	    <span class="input-group-btn">
 	      <button class="btn btn-default btn-lg" type="submit">
 		<span class="glyphicon glyphicon-search"></span>

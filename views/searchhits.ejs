@@ -1,0 +1,57 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-1">
+      <p>
+        <% if (no_hits == 0) { %>
+	   Your search &ndash; <strong> <%= q %> </strong> &ndash; did not match
+	   any packages.
+        <% } else if (no_hits == 1) { %>
+	   Found 1 package in <%= (took/1000).toFixed(2) %> seconds
+        <% } else { %>
+	   Found <%= no_hits %> packages in <%= (took/1000).toFixed(2) %> seconds
+        <% } %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-1">
+      <p>
+        <% hits.forEach(function(hit) { %>
+	  <%- include('search_hit_pkg', { pkg: hit._source }); %>
+        <% }); %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<% if (no_hits > 10) { %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-1">
+        <nav><ul class="pagination">
+          <% if (page != 1) { %>
+            <li>
+	      <a href="?q=<%= encodeURIComponent(q) %>&page=<%= page - 1 %>"> &laquo; </a>
+	    </li>
+          <% } %>
+          <% for (var i = 1; i <= no_pages; i++) { %>
+      	    <li <% if (i == page) { %>class="active"<% } %> >
+	      <a href="?q=<%= encodeURIComponent(q) %>&page=<%= i %>"><%= i %></a>
+	    </li>
+          <% } %>
+	  <% if (page != no_pages) { %>
+            <li>
+	      <a href="?q=<%= encodeURIComponent(q) %>&page=<%= page + 1 %>"> &raquo; </a>
+	    </li>
+          <% } %>
+        </ul></nav>
+      </div>
+    </div>
+  </div>
+<% } %>
+
+<hr>
