@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var badges = require('./routes/badges');
 var search = require('./routes/search');
+var pkg = require('./routes/pkg');
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/badges', badges);
+app.use('/pkg', pkg);
 app.use('/', search);
 app.use('/', routes);
 

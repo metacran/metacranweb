@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var elasticsearch = require('elasticsearch');
-var moment = require('moment');
 var urls = require('../lib/urls');
-var linkify = require('../lib/linkify');
+var clean_package = require('../lib/clean_package');
 
 router.get("/search.html", function(req, res) {
     req.query.page = + req.query.page || 1;
@@ -50,7 +49,10 @@ function do_query(req, res, query) {
 
 function show_results(resp, req, res) {
 
-    var hits = clean_hits(resp.hits.hits);
+    var hits = resp.hits.hits.map(function(x) {
+	x._source = clean_package(x._source);
+	return x;
+    });
     var no_hits = resp.hits.total;
     var took = resp.took;
     var no_pages = Math.min(Math.ceil(no_hits / 10), 10);
@@ -61,37 +63,6 @@ function show_results(resp, req, res) {
 			   'took': took,
 			   'hits': hits,
 			   'no_pages': no_pages   });
-}
-
-function clean_hits(hits) {
-    return hits.map(function(hit) {
-
-	// Linkify URL
-	if (hit._source.URL) {
-	    hit._source.URL = linkify(hit._source.URL);
-	}
-	// Remove newlines from title
-	if (hit._source.Title) {
-	    hit._source.Title =
-		hit._source.Title.replace(/<U\+000a>/g, ' ');
-	}
-	// Remove newlines from description, also linkify
-	if (hit._source.Description) {
-	    hit._source.Description =
-		linkify(hit._source.Description.replace(/<U\+000a>/g, ' '));
-	}
-	// Use 'time ago' instead of date
-	if (hit._source.date) {
-	    hit._source.timeago = moment(hit._source.date).fromNow();
-	}
-	// Remove email address from maintainer
-	if (hit._source.Maintainer) {
-	    hit._source.Maintainer =
-		hit._source.Maintainer.replace(/\s*<[^>]*>\s*$/, '');
-	}
-
-	return hit;
-    })
 }
 
 function show_empty(res) {

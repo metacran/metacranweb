@@ -83,10 +83,19 @@ p.alphatitle {
     padding-top: 10px;
 }
 
-.packagedesc {
-    clear: both;
-}
-
 .packageurl {
     font-size: 75%;
+}
+
+.install-package {
+    margin-top: 53px;
+    font-family: monospace;
+}
+
+.package-page {
+    font-size: 130%;
+}
+
+.package-main {
+    padding-right: 50px;
 }

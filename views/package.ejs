@@ -1,0 +1,61 @@
+<% include header %>
+<% include nav %>
+<% include searchbox %>
+
+<div class="container package-page">
+  <div class="row">
+  
+    <div class="col-md-8 package-main">
+      <div class="page-header">
+	<h1><%= pkg.Package %></h1>
+      </div>
+      <h2><%= pkg.Title %></h2>
+      <p><%- pkg.Description %></p>
+      <p><a href="http://cran.rstudio.com/web/packages/<%= pkg.Package %>">
+	  See at CRAN</a></p>
+    </div>
+    
+    <div class="col-md-4 package-sidebar">
+      <div class="install-package">
+	<span class="glyphicon glyphicon-download-alt"
+	      aria-hidden="true"></span>
+	install.packages("<%= pkg.Package %>")
+      </div>
+      <hr>
+      <p>Version <strong><%= pkg.Version %></strong></p>
+      <hr>
+      <p>By <strong><%= pkg.Maintainer %></strong>, <%= pkg.timeago %></p>
+      <hr>
+
+      <% if (pkg.URL) { %><p><%- pkg.URL %></p><hr><% } %>
+
+      <% if (pkg.BugReports) { %>
+        <p>Report a bug at <%- pkg.BugReports %></p><hr>
+      <% } %>
+      
+      <% if (pkg.License) { %><p><strong><%= pkg.License %></strong>
+	license</p><hr><% } %>
+      <% if (pkg.Imports) { %>
+        <p><strong>Imports</strong> <%- pkg.Imports %></p>
+      <% } %>
+      <% if (pkg.Depends) { %>
+        <p><strong>Depends on</strong> <%- pkg.Depends   %></p>
+      <% } %>
+      <% if (pkg.Suggests) { %>
+        <p><strong>Suggests</strong> <%- pkg.Suggests  %></p>
+      <% } %>
+      <% if (pkg.Enhances) { %>
+        <p><strong>Enhances</strong> <%- pkg.Enhances  %></p>
+      <% } %>
+      <% if (pkg.LinkingTo) { %>
+        <p><strong>Linking to</strong> <%- pkg.LinkingTo %></p>
+      <% } %>
+    </div>
+    
+  </div>
+</div>
+
+<hr>
+
+<% include links %>
+<% include footer %>
