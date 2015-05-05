@@ -1,59 +1,14 @@
-<div class="container">
-  <h1 class="page-header text-center">Most downloaded</h1>
-  <!-- Example row of columns -->
-
-  <div class="row">
-    <div class="col-md-4 text-center">
-      <a href="/pkg/ggplot2"><h2>ggplot2</h2></a>
-      <h4>An Implementation of the Grammar of Graphics</h4>
-      <p>1.0.1, published on 2015-03-17, by Hadley Wickham</p>
-    </div>
-    <div class="col-md-4 text-center">
-      <a href="/pkg/plyr"><h2>plyr</h2></a>
-      <h4>Tools for splitting, applying and combining data</h4>
-      <p>1.8.1, published on 2014-02-26, by Hadley Wickham</p>
-    </div>
-    <div class="col-md-4 text-center">
-      <a href="/pkg/Rcpp"><h2>Rcpp</h2></a>
-      <h4>Seamless R and C++ Integration</h4>
-      <p>0.11.5, published on 2015-03-06, by Dirk Eddelbuettel</p>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-4 text-center">
-      <a href="/pkg/digest"><h2>digest</h2></a>
-      <h4>Create Cryptographic Hash Digests of R Objects</h4>
-      <p>0.6.8, published on 2014-12-31, by Dirk Eddelbuettel</p>
-    </div>
-    <div class="col-md-4 text-center">
-      <a href="/pkg/stringr"><h2>stringr</h2></a>
-      <h4>Make it easier to work with strings</h4>
-      <p>0.6.2, published on 2012-12-06, by Hadley Wickham</p>
-    </div>
-    <div class="col-md-4 text-center">
-      <a href="/pkg/RColorBrewer"><h2>RColorBrewer</h2></a>
-      <h4>ColorBrewer Palettes</h4>
-      <p>1.1-2, published on 2014-12-07, by Erich Neuwirth</p>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-4 text-center">
-      <a href="/pkg/reshape2"><h2>reshape2</h2></a>
-      <h4>Flexibly Reshape Data: A Reboot of the Reshape Package</h4>
-      <p>1.4.1, published on 2014-12-06, by Hadley Wickham</p>
-    </div>
-    <div class="col-md-4 text-center">
-      <a href="/pkg/colorspace"><h2>colorspace</h2></a>
-      <h4>Color Space Manipulation</h4>
-      <p>1.2-6, published on 2015-03-11, by Achim Zeileis</p>
-    </div>
-    <div class="col-md-4 text-center">
-      <a href="/pkg/scales"><h2>scales</h2></a>
-      <h4>Scale functions for graphics</h4>
-      <p>0.2.4, published on 2014-04-22, by Hadley Wickham</p>
-    </div>
-  </div>
-
-</div>
+  <% var ptr = 0; %>
+  <% for (var i = 0; i < 3; i++) { %>
+     <div class="row">
+       <% for (var j = 0; j < 3; j++) { %>
+	  <% var mypkg = pkgs[ptr]; ptr++; %>
+	  <div class="col-md-4 text-center">
+	    <a href="/pkg/<%= mypkg.Package %>"><h2><%= mypkg.Package %></h2></a>
+	    <h4><%= mypkg.Title %></h4>
+	    <p><%= mypkg.Version %>, published
+	      <%= mypkg.timeago %>, by <%= mypkg.Maintainer %></p>
+	  </div>
+       <% } %>
+     </div>
+  <% } %>

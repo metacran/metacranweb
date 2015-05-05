@@ -91,8 +91,6 @@ function make_badge(res, message, query) {
     var textwidth = 47 + 3.5 * len - 1.5 * no_dots;
     var path_d = 36 + 7 * len - 3 * no_dots;
 
-    console.log(no_dots);
-
     svg = badge_svg
 	.replace(/:color:/g, '#' + color.replace(/[^\w]/g, ''))
 	.replace(/:width:/g, width)
