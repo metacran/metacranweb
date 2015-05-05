@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var get_stats = require('../lib/get_stats');
 var top_downloaded = require('../lib/top_downloaded');
 var trending = require('../lib/trending');
 var recent = require('../lib/recent');
