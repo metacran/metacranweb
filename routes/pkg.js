@@ -4,6 +4,7 @@ var request = require('request');
 var urls = require('../lib/urls');
 var clean_package = require('../lib/clean_package');
 var clean_deps = require('../lib/clean_deps');
+var handle_error = require('../lib/handle_error');
 
 re_full = new RegExp("^/([\\w\\.]+)$", 'i');
 

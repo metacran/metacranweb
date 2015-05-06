@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var multiline = require('multiline');
 var request = require('request');
+var handle_error = require('../lib/handle_error');
 
 var svg_colors = {
     "brightgreen": "4c1",
