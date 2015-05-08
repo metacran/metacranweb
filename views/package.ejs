@@ -40,6 +40,32 @@
       <% if (pkg.LinkingTo) { %>
         <p><strong>Linking to</strong> <%- pkg.LinkingTo %></p>
       <% } %>
+
+      <% if (pkg.Package in revdeps) { %>
+        <hr>
+        <% var rd = revdeps[pkg.Package]; %>
+	<% if ('Imports' in rd) { %>
+          <p><strong>Imported by</strong>
+	  <%- rd.Imports.map(pkg_link).join(', ') %>.</p>
+	<% } %>
+	<% if ('Depends' in rd) { %>
+          <p><strong>Depended on by</strong>
+	  <%- rd.Depends.map(pkg_link).join(', ') %>.</p>
+	<% } %>
+	<% if ('Suggests' in rd) { %>
+          <p><strong>Suggested by</strong>
+	  <%- rd.Suggests.map(pkg_link).join(', ') %>.</p>
+	<% } %>
+	<% if ('Enhances' in rd) { %>
+          <p><strong>Enhanced by</strong>
+	  <%- rd.Enhances.map(pkg_link).join(', ') %>.</p>
+	<% } %>
+	<% if ('LinkingTo' in rd) { %>
+          <p><strong>Linked to by</strong>
+	  <%- rd.LinkingTo.map(pkg_link).join(', ') %>.</p>
+	<% } %>
+
+      <% } %>
     </div>
 
     <div class="col-md-8 package-main">
