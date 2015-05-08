@@ -1,0 +1,40 @@
+
+<div class="container">
+  <h1 class="page-header text-center">All Packages</h1>
+
+  <div class="row starting-letters">
+    <div class="col-md-12 text-center">
+      &middot
+      <% for (var i = 65; i <= 90; i++) { %>
+	 <% var c = String.fromCharCode(i); %>
+	 <a href="/pkglist/<%= c %>"><%= c %></a> &middot;
+      <% } %>
+    </div>
+  </div>
+
+  <% var i=1; for (pkg in pkgs) { %>
+    <% if (i==4) { %> <div class="row"><% } %>
+        <div class="col-sm-3 text-center">
+	  <h3><a href="/pkg/<%= pkg %>"><strong><%= pkg %></strong></a></h3>
+          <p>
+	    <%= pkgs[pkg].Title %> <br/>
+	    <%= pkgs[pkg].Version %>, published <%= pkgs[pkg].timeago %>
+	    by <%= pkgs[pkg].Maintainer %>
+	  </p>
+	</div>
+    <% if (i==4) { %></div><% i=1; } else { i=i+1; } %>
+  <% } %>
+
+</div>
+
+<div class="container"
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <a class="btn btn-default"
+	 href="?startkey=<%= pkgs[pkg].Package %>"
+	 role="button">Next page</a>
+    </div>
+  </div>
+</div>
+
+<hr>
