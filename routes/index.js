@@ -9,11 +9,11 @@ router.get('/', function(req, res) {
 
     async.parallel(
 	{ 'downloads': function(cb) {
-	    top_downloaded(function(res) { cb(null, res) }) },
-	  'trending':  function(cb) {
-	    trending(function(res) { cb(null, res) }) },
-	  'recent':    function(cb) {
-	    recent(function(res) { cb(null, res) }) }
+	    top_downloaded(res, function(r) { cb(null, r) }) },
+	  'trending': function(cb) {
+	    trending(res, function(r) { cb(null, r) }) },
+	  'recent': function(cb) {
+	    recent(res, function(r) { cb(null, r) }) }
 	},
 	function(err, results) {
 	    res.render('index', results);
