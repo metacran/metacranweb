@@ -16,6 +16,7 @@
     "request": "~2.55.0",
     "multiline": "~1.0.2",
     "elasticsearch": "~4.0.2",
-    "moment": "~2.10.2"
+    "moment": "~2.10.2",
+    "async": "~0.9.0"
   }
 }
