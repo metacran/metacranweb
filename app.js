@@ -11,6 +11,7 @@ var search = require('./routes/search');
 var pkg = require('./routes/pkg');
 var pkglist = require('./routes/pkglist');
 var trendinglist = require('./routes/trendinglist');
+var downloadlist = require('./routes/downloadlist');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/trending', trendinglist);
+app.use('/downloaded', downloadlist);
 app.use('/badges', badges);
 app.use('/pkglist', pkglist);
 app.use('/pkg', pkg);

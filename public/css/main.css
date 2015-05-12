@@ -8,6 +8,10 @@
     color: #f00;
 }
 
+.page-header a {
+    color: #f00;
+}
+
 .page-header a:visited {
     color: #f00;
 }
