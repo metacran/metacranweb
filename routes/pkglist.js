@@ -13,7 +13,6 @@ router.get(re_full, function(req, res) {
 })
 
 function do_query(res, from, query) {
-    console.log(from)
     var startkey = query.startkey || from || '';
     var url = urls.crandb + '/-/latest?limit=100&startkey="' +
 	startkey + '"';
@@ -21,7 +20,11 @@ function do_query(res, from, query) {
 	if (error || response.statusCode != 200) { return handle_error(res); }
 	var pkgs = JSON.parse(body);
 	for (p in pkgs) { pkgs[p] = clean_package(pkgs[p]); }
-	res.render('pkglist', { 'pkgs': pkgs });
+	res.render('pkglist', { 'pkgs': pkgs,
+				'title': 'All packages',
+				'paging': true,
+				'number': false
+			      });
     })
 }
 

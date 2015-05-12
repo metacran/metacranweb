@@ -10,6 +10,7 @@ var badges = require('./routes/badges');
 var search = require('./routes/search');
 var pkg = require('./routes/pkg');
 var pkglist = require('./routes/pkglist');
+var trendinglist = require('./routes/trendinglist');
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/trending', trendinglist);
 app.use('/badges', badges);
 app.use('/pkglist', pkglist);
 app.use('/pkg', pkg);

@@ -8,6 +8,10 @@
     color: #f00;
 }
 
+.page-header a:visited {
+    color: #f00;
+}
+
 .jumbotron {
     padding-top: 0px;
     padding-bottom: 0px;

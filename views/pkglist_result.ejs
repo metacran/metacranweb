@@ -1,6 +1,6 @@
 
 <div class="container">
-  <h1 class="page-header text-center">All Packages</h1>
+  <h1 class="page-header text-center"><%= title %></h1>
 
   <div class="row starting-letters">
     <div class="col-md-12 text-center">
@@ -12,29 +12,36 @@
     </div>
   </div>
 
-  <% var i=1; for (pkg in pkgs) { %>
+  <% var i=1, j=1; for (pkg in pkgs) { %>
     <% if (i==4) { %> <div class="row"><% } %>
         <div class="col-sm-3 text-center">
-	  <h3><a href="/pkg/<%= pkg %>"><strong><%= pkg %></strong></a></h3>
+	  <h3><a href="/pkg/<%= pkgs[pkg].Package %>">
+	      <strong>
+		<% if (number) { %><%= j %><% } %>
+		<%= pkgs[pkg].Package %>
+	      </strong>
+	  </a></h3>
           <p>
 	    <%= pkgs[pkg].Title %> <br/>
 	    <%= pkgs[pkg].Version %>, published <%= pkgs[pkg].timeago %>
 	    by <%= pkgs[pkg].Maintainer %>
 	  </p>
 	</div>
-    <% if (i==4) { %></div><% i=1; } else { i=i+1; } %>
+    <% j++; if (i==4) { %></div><% i=1; } else { i=i+1; } %>
   <% } %>
 
 </div>
 
-<div class="container"
-  <div class="row">
-    <div class="col-sm-12 text-center">
-      <a class="btn btn-default"
-	 href="?startkey=<%= pkgs[pkg].Package %>"
-	 role="button">Next page</a>
+<% if (paging) { %>
+  <div class="container"
+    <div class="row">
+      <div class="col-sm-12 text-center">
+	<a class="btn btn-default"
+	   href="?startkey=<%= pkgs[pkg].Package %>"
+	   role="button">Next page</a>
+      </div>
     </div>
   </div>
-</div>
+<% } %>
 
 <hr>
