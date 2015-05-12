@@ -1,5 +1,5 @@
 <div class="container hidden-xs">
-  <div class="row">
+  <div class="row index-numbers">
     <div class="col-sm-3">
       <h3 class="text-center">
         <a href="/pkglist" title ="Browse packages">
@@ -14,13 +14,17 @@
     </div>
     <div class="col-sm-3">
       <h3 class="text-center">
-	<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
-	<%= numupdates %> <br><small>updates last week</small></h3>
+	<a href="/recent" title="Recently updated packages">
+	  <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+	  <%= numupdates %> <br><small>updates last week</small></h3>
+        </a>
     </div>
     <div class="col-sm-3">
       <h3 class="text-center">
-	<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-	<%= numdownloads %> <br><small>downloads last week</small></h3>
+	<a href="/downloaded" title="Most downloaded packages">
+	  <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+	  <%= numdownloads %> <br><small>downloads last week</small></h3>
+        </a>
     </div>
   </div>
 </div>

@@ -16,6 +16,10 @@
     color: #f00;
 }
 
+.index-numbers a, .index-numbers a:visited {
+    color: #000
+}
+
 .jumbotron {
     padding-top: 0px;
     padding-bottom: 0px;
