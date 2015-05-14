@@ -20,7 +20,7 @@ router.get('/', function(req, res) {
 	    var pkgs = JSON.parse(body);
 	    var keys = Object.keys(pkgs);
 	    var pkg_array = [];
-	    for (k in keys) { console.log(k); pkg_array.push(pkgs[keys[k]]); }
+	    for (k in keys) { pkg_array.push(pkgs[keys[k]]); }
 	    res.render(
 		'pkglist',
 		{ 'pkgs': pkg_array.map(clean_package),
