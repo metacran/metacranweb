@@ -14,7 +14,8 @@
       <hr>
       <p>Version <strong><%= pkg.Version %></strong></p>
       <hr>
-      <p>By <strong><%= pkg.Maintainer %></strong>, <%= pkg.timeago %></p>
+      <p>By <strong><a href="/maint/<%= pkg.maintainer_email %>">
+	    <%= pkg.Maintainer %></a></strong>, <%= pkg.timeago %></p>
       <hr>
 
       <% if (pkg.URL) { %><p><%- pkg.URL %></p><hr><% } %>
