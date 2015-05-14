@@ -4,7 +4,8 @@
       <a href="/pkg/<%= pkg.Package %>"><%= pkg.Package %></a>
     </span>
     <span class="packageauthor">
-      &mdash; by <%= pkg.Maintainer %>, <%= pkg.timeago %>
+      &mdash; by <a href="/maint/<%= pkg.maintainer_email %>"><%= pkg.Maintainer %></a>,
+      <%= pkg.timeago %>
     </span>
   </p>
   <div class="packagedesc">

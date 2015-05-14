@@ -26,7 +26,9 @@
           <p>
 	    <%= pkgs[pkg].Title %> <br/>
 	    <%= pkgs[pkg].Version %>, published <%= pkgs[pkg].timeago %>
-	    by <%= pkgs[pkg].Maintainer %>
+	    by <a href="/maint/<%= pkgs[pkg].maintainer_email  %>">
+	      <%= pkgs[pkg].Maintainer %>
+	    </a>
 	  </p>
 	</div>
     <% j++; if (i==4) { %></div><% i=1; } else { i=i+1; } %>

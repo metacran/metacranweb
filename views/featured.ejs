@@ -7,7 +7,10 @@
 	    <a href="/pkg/<%= mypkg.Package %>"><h2><%= mypkg.Package %></h2></a>
 	    <h4><%= mypkg.Title %></h4>
 	    <p><%= mypkg.Version %>, published
-	      <%= mypkg.timeago %>, by <%= mypkg.Maintainer %></p>
+	      <%= mypkg.timeago %>, by <a href="/maint/<%= mypkg.maintainer_email %>">
+		<%= mypkg.Maintainer %>
+	      </a>
+	    </p>
 	  </div>
        <% } %>
      </div>

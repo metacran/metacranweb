@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// Routes
+
 var routes = require('./routes/index');
 var badges = require('./routes/badges');
 var search = require('./routes/search');
@@ -13,6 +15,7 @@ var pkglist = require('./routes/pkglist');
 var trendinglist = require('./routes/trendinglist');
 var downloadlist = require('./routes/downloadlist');
 var mostrecent = require('./routes/mostrecent');
+var maint = require('./routes/maint');
 
 var app = express();
 
@@ -34,6 +37,7 @@ app.use('/downloaded', downloadlist);
 app.use('/badges', badges);
 app.use('/pkglist', pkglist);
 app.use('/pkg', pkg);
+app.use('/maint', maint);
 app.use('/', search);
 app.use('/', routes);
 
