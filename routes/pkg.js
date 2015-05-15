@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var get_package = require('../lib/get_package');
 var get_revdeps = require('../lib/get_revdeps');
+var get_readme = require('../lib/get_readme');
 var async = require('async');
 var handle_error = require('../lib/handle_error');
 
@@ -19,7 +20,9 @@ function do_query(res, package) {
 	    'pkg': function(cb) {
 		get_package(package, function(e, r) { cb(e, r)}) },
 	    'revdeps': function(cb) {
-		get_revdeps(package, function(e, r) { cb(e, r)}) }
+		get_revdeps(package, function(e, r) { cb(e, r)}) },
+	    'readme': function(cb) {
+		get_readme(package, function(e, r) { cb(e, r)}) }
 	},
 	function(err, results) {
 	    if (err) { return handle_error(res, err) }

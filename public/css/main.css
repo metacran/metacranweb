@@ -109,9 +109,33 @@ p.alphatitle {
 }
 
 .package-sidebar {
-    padding-right: 30px;
+    padding-left: 30px;
 }
 
 .bottom-links {
     margin-top: 100px;
+}
+
+#readme pre {
+    border: 0px;
+}
+
+#readme h1 {
+    font-size: 130%;
+}
+
+#readme h2 {
+    font-size: 115%;
+}
+
+#readme h3,h4,h5,h6,h7 {
+    font-size: 100%;
+}
+
+#tabpanel {
+    margin-top: 40px;
+}
+
+.package-main .page-header {
+    font-size: 300%;
 }

@@ -4,7 +4,18 @@
 
 <div class="container package-page">
   <div class="row">
-  
+
+    <div class="col-md-8 package-main">
+      <div class="page-header">
+	<h1><%= pkg.Package %></h1>
+      </div>
+      <div>
+	<h2><%= pkg.Title %></h2>
+	<p><%- pkg.Description %></p>
+      </div>
+      <% if (readme) { %><hr> <div id="readme"><%- readme %></div> <hr><% } %>
+    </div>
+
     <div class="col-md-4 package-sidebar">
       <div class="install-package">
 	<span class="glyphicon glyphicon-download-alt"
@@ -69,16 +80,6 @@
       <% } %>
     </div>
 
-    <div class="col-md-8 package-main">
-      <div class="page-header">
-	<h1><%= pkg.Package %></h1>
-      </div>
-      <h2><%= pkg.Title %></h2>
-      <p><%- pkg.Description %></p>
-      <p><a href="http://cran.rstudio.com/web/packages/<%= pkg.Package %>">
-	  See at CRAN</a></p>
-    </div>
-    
   </div>
 </div>
 
