@@ -13,7 +13,7 @@ router.get(re_full, function(req, res) {
     var maint = req.params[0];
     var url = urls.crandb + '/-/maintainer?key=' +
 	encodeURIComponent(JSON.stringify(maint))
-    console.log(url)
+
     request(url, function(error, response, body) {
 	if (error || response.statusCode != 200) { return handle_error(res); }
 
@@ -30,6 +30,7 @@ router.get(re_full, function(req, res) {
 	    var pkg_array = [];
 	    for (k in keys) { pkg_array.push(pkgs[keys[k]]); }
 	    var cleanpkg = pkg_array.map(clean_package);
+	    if (!pkg_array[0]) { return handle_error(res); }
 	    var name = pkg_array[0].Maintainer;
 	    
 	    res.render(
