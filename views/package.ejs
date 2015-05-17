@@ -28,7 +28,7 @@
 	    <%= pkg.Maintainer %></a></strong>, <%= pkg.timeago %></p>
       <hr>
 
-      <% if (pkg.URL) { %><p><%- pkg.URL %></p><hr><% } %>
+      <% if (pkg.URL) { %><p><strong><%- pkg.URL %></strong></p><hr><% } %>
 
       <% if (pkg.BugReports) { %>
         <p>Report a bug at <%- pkg.BugReports %></p><hr>
