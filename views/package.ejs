@@ -23,9 +23,8 @@
 	install.packages("<%= pkg.Package %>")
       </div>
       <hr>
-      <p>Version <strong><%= pkg.Version %></strong></p>
-      <hr>
-      <p>By <strong><a href="/maint/<%= pkg.maintainer_email %>">
+      <p><strong><%= pkg.Version %></strong>
+	by <strong><a href="/maint/<%= pkg.maintainer_email %>">
 	    <%= pkg.Maintainer %></a></strong>, <%= pkg.timeago %></p>
       <hr>
 
@@ -34,6 +33,11 @@
       <% if (pkg.BugReports) { %>
         <p>Report a bug at <%- pkg.BugReports %></p><hr>
       <% } %>
+
+      <p><strong>Authors:</strong>
+	<%= pkg.Author %>
+      </p>
+      <hr>
       
       <% if (pkg.License) { %><p><strong><%= pkg.License %></strong>
 	license</p><hr><% } %>
