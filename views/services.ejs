@@ -1,0 +1,147 @@
+<% include header %>
+<% include nav %>
+
+<div class="container about-page">
+  <div class="row">
+
+    <div class="col-md-8 col-md-offset-2 page-header">
+      <h2 id="github">CRAN @ GitHub</h2>
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+      <p>
+	METACRAN mirrors CRAN packages at GitHub. Each CRAN package lives
+	in its own github repository, .g. package Rcpp is
+	at <a href="https://github.com/cran/Rcpp">
+	https://github.com/cran/Rcpp</a>. All versions of all packages are
+	included, and each version is a separate git commit, tagged with the
+	version number. We tried to keep the original dates and
+	authors/maintainers as well.
+      </p>
+      <p>
+	The main goal of CRAN @ GitHub is the easy access to the
+	source code or CRAN packages. In particular, you can
+	<ul>
+	  <li>See differences between package versions, e.g.
+	    <a href="https://github.com/cran/crayon/commit/72b56a09cd4cbc787eb90a31d88f736d280af8b5">
+	      what changed between 1.2.0 and 1.2.1</a>
+	    in <a href="/pkg/crayon">crayon</a>.
+	  <li>Fork packages, and create patched versions of them,
+	    for your own purposes.
+	</ul>
+      </p>
+    </div>
+
+    <div class="col-md-8 col-md-offset-2 page-header">
+      <h2 id="badges">Badges</h2>
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+
+      <h3>CRAN versions</h3>
+      <p><code>
+	  http://www.r-pkg.org/badges/version/{package}
+      </code></p>
+      <p>
+	<img src="http://www.r-pkg.org/badges/version/Rcpp">
+	<img src="http://www.r-pkg.org/badges/version/foobar">
+      </p>
+      <p>
+	Shows the version number of the package on CRAN,
+	or &ldquo;not published&rdquo; if the package is not
+	published on CRAN.
+      </p>
+
+      <h3>CRAN downloads</h3>
+      <p><code>
+	  http://cranlogs.r-pkg.org/badges/{summary}/{package}
+      </code></p>
+      <p>
+	<img src="http://cranlogs.r-pkg.org/badges/grand-total/Rcpp">
+	<img src="http://cranlogs.r-pkg.org/badges/last-month/Rcpp">
+	<img src="http://cranlogs.r-pkg.org/badges/last-week/Rcpp">
+	<img src="http://cranlogs.r-pkg.org/badges/last-day/Rcpp">
+      </p>
+      <p>
+	Shows number of downloads for a given package, see
+	<a href="https://github.com/metacran/cranlogs.app">
+	  https://github.com/metacran/cranlogs.app</a> for details.
+      </p>
+
+    </div>
+
+    <div class="col-md-8 col-md-offset-2 page-header">
+      <h2 id="api">METACRAN APIs</h2>
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+
+      <h3>Overview</h3>
+      <p>
+	Several METACRAN services offer a public API. The API is over
+	HTTP, and data is sent and received as JSON.
+      </p>
+
+      <!-- <ol> -->
+      <!-- 	<li><a href="#crandb">Package metadata database</a> -->
+      <!-- 	<li><a href="#search">Package search</a> -->
+      <!-- 	<li><a href="#cranlogs">Package downloads</a> -->
+      <!-- 	<li><a href="#rversions">R versions</a> -->
+      <!-- </ol> -->
+
+      <h3 id="crandb">Package database</h3>
+      <p>
+	Database of all CRAN R packages. It is a CouchDB database,
+	hosted at <a href="http://crandb.r-pkg.org/">
+	  http://crandb.r-pkg.org/</a>.	Its API is discussed at the project
+	page: <a href="https://github.com/metacran/crandb">
+	  https://github.com/metacran/crandb</a>.
+      </p>
+
+      <h3 id="search">Package search</h3>
+      <p>
+	Search service that indexes package metadata. It is provided
+	by an Elasticsearch server, that exposes its search API.
+	It is hosted at <a href="http://seer.r-pkg.org:9200/_search">
+	  http://seer.r-pkg.org:9200/_search</a>, and its API is the
+	standard Elasticsearch API.
+      </p>
+
+      <h3 id="cranlogs">Package downloads</h3>
+      <p>
+	Download summaries from the RStudio CRAN mirror,
+	taken from <a href="http://cran-logs.rstudio.com/">
+	  http://cran-logs.rstudio.com/</a>.
+	It is hosted <a href="http://cranlogs.r-pkg.org">
+	  http://cranlogs.r-pkg.org</a> and its API is discussed
+	at the project page:
+	<a href="https://github.com/metacran/cranlogs.app">
+	  https://github.com/metacran/cranlogs.app</a>.
+      </p>
+
+      <h3 id="rversions">R versions</h3>
+      <p>
+	Small API that reports current and old R versions. It is
+	hosted at <a href="http://rversions.r-pkg.org">
+	  http://rversions.r-pkg.org</a> and it API is documented
+	at the project page:
+	<a href="https://github.com/metacran/rversions.app">
+	  https://github.com/metacran/rversions.app</a>.
+      </p>
+
+    </div>
+
+    <div class="col-md-8 col-md-offset-2 page-header">
+      <h2 id="rbuilder">R package builder</h2>
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+      <p>
+	R-builder is a script that eases building R packages
+	from GitHub with various CI services. See its project page
+	for details: <a href="https://github.com/metacran/r-builder">
+	  https://github.com/metacran/r-builder</a>.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<% include links %>
+<% include footer %>

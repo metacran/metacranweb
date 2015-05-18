@@ -39,8 +39,8 @@ router.get('/about', function(req, res) {
     res.render('about');
 })
 
-router.get('/api', function(req, res) {
-    res.render('underconstruction');
+router.get('/services', function(req, res) {
+    res.render('services');
 })    
 
 module.exports = router;
