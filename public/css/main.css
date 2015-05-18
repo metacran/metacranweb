@@ -166,3 +166,12 @@ p.alphatitle {
     display: block;
     white-space: nowrap;
 }
+
+.about-page {
+    font-size: 1.2em;
+}
+
+.about-page p {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}

@@ -36,7 +36,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/about', function(req, res) {
-    res.render('underconstruction');
+    res.render('about');
 })
 
 router.get('/api', function(req, res) {
