@@ -6,8 +6,11 @@ var urls = require('../lib/urls');
 var handle_error = require('../lib/handle_error');
 var clean_package = require('../lib/clean_package');
 
-re_full = new RegExp("^/(.*$)");
+router.get('/', function(req, res) {
+    res.render('underconstruction');
+})
 
+re_full = new RegExp("^/(.+)$");
 router.get(re_full, function(req, res) {
 
     var maint = req.params[0];

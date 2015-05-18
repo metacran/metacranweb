@@ -47,6 +47,10 @@ var badge_svg = multiline(function(){/*
 </svg>
 */});
 
+router.get("/", function(req, res) {
+    res.render('underconstruction');
+})
+
 var re_pre = '^/version/';
 var re_pkg = '([\\w\\.]+)';
 var re_suf = '$';
