@@ -6,6 +6,7 @@ var get_readme = require('../lib/get_readme');
 var get_news = require('../lib/get_news');
 var async = require('async');
 var handle_error = require('../lib/handle_error');
+var pkg_link = require('../lib/pkg_link');
 
 re_full = new RegExp("^/([\\w\\.]+)$", 'i');
 
@@ -29,9 +30,7 @@ function do_query(res, package) {
 	},
 	function(err, results) {
 	    if (err) { return handle_error(res, err) }
-	    results.pkg_link = function(x) {
-		return '<a href="/pkg/' + x + '">' + x + '</a>';
-	    };
+	    results.pkg_link = pkg_link;
 	    results.pdf_url = "http://cran.rstudio.com/web/packages/";
 	    res.render('package', results);
 	}

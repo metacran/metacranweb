@@ -180,3 +180,11 @@ p.alphatitle {
     height: 1000px;
     border: 0px;
 }
+
+.maint-list h3 a {
+    color: #000;
+}
+
+.maint-list h3 a:visited {
+    color: #000;
+}

@@ -1,6 +1,45 @@
 <% include header %>
 <% include nav %>
-<% include searchbox %>
+
+<div class="container maint-list">
+  <h2 class="page-header text-center"><a href="/trending">Package maintainers</a></h2>
+
+  <div class="row starting-letters">
+    <div class="col-md-12 text-center">
+      &middot
+      <% for (var i = 65; i <= 90; i++) { %>
+	 <% var c = String.fromCharCode(i); %>
+	 <a href="/maint?startkey=<%= c %>"><%= c %></a> &middot;
+	 <% } %>
+    </div>
+  </div>
+
+
+  <% var i=1, j=1; for (ptr in people) { %>
+  <% if (i==4) { %> <div class="row"><% } %>
+    <div class="col-sm-3 text-center">
+      <h3><a href="/maint/<%= people[ptr].email %>">
+	  <strong>
+	    <%= people[ptr].name %>
+	  </strong>
+      </a></h3>
+      <p><%- packages[people[ptr].email].map(pkg_link).join(', '); %></p>
+    </div>
+  <% j++; if (i==4) { %></div><% i=1; } else { i=i+1; } %>
+  <% } %>
+
+</div>
+
+<div class="container"
+     <div class="row">
+       <div class="col-sm-12 text-center">
+	 <a class="btn btn-default"
+	    href="?startkey=<%= people[ptr].name %>"
+	    role="button">Next page</a>
+       </div>
+     </div>
+</div>
+
 
 <% include links %>
 <% include footer %>
