@@ -175,3 +175,8 @@ p.alphatitle {
     padding-left: 20px;
     margin-bottom: 20px;
 }
+
+#Manual {
+    height: 1000px;
+    border: 0px;
+}

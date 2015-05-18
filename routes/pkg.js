@@ -32,6 +32,7 @@ function do_query(res, package) {
 	    results.pkg_link = function(x) {
 		return '<a href="/pkg/' + x + '">' + x + '</a>';
 	    };
+	    results.pdf_url = "http://cran.rstudio.com/web/packages/";
 	    res.render('package', results);
 	}
     )
