@@ -3,7 +3,7 @@
      <div class="row">
        <% for (var j = 0; j < 3; j++) { %>
 	  <% var mypkg = pkgs[ptr]; ptr++; %>
-	  <div class="col-md-4 text-center">
+	  <div class="col-sm-4">
 	    <a href="/pkg/<%= mypkg.Package %>"><h2><%= mypkg.Package %></h2></a>
 	    <h4><%= mypkg.Title %></h4>
 	    <p><%= mypkg.Version %>, published

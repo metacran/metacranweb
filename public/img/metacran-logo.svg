@@ -10,11 +10,11 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="105"
-   height="105"
+   height="75"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="metacran-logo.pdf"
+   sodipodi:docname="metacran-logo.svg"
    inkscape:export-filename="/Users/gaborcsardi/works/metacran/metacran-logo.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
@@ -28,7 +28,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.6095238"
-     inkscape:cx="52.5"
+     inkscape:cx="36.007509"
      inkscape:cy="52.5"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -61,7 +61,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -69,10 +69,10 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-296.08408,-350.29762)">
+     transform="translate(-296.08408,-380.29762)">
     <g
        id="g3956"
-       transform="translate(1.3999598,-19.895213)">
+       transform="translate(1.3999598,-4.8952233)">
       <path
          d="m 301.87289,419.50504 0,-26.01563 5.11524,0 7.1543,20.12695 7.34765,-20.12695 4.57031,0 0,26.01563 -3.44531,0 0,-21.14649 -7.10156,19.40625 -3.56836,0 -6.89063,-19.47656 0,21.2168 -3.18164,0"
          style="font-size:36px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:83.99999738%;letter-spacing:-1px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#666666;fill-opacity:1;stroke:none;font-family:Luxi Sans;-inkscape-font-specification:Luxi Sans"
@@ -122,7 +122,7 @@
        width="102.07509"
        height="65.084579"
        x="297.54654"
-       y="370.25534"
+       y="385.25534"
        ry="11.493073" />
   </g>
 </svg>
