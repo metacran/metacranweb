@@ -113,6 +113,10 @@
         <p><strong>Linking to</strong> <%- pkg.LinkingTo %></p>
       <% } %>
 
+      <% if (pkg.SystemRequirements) { %>
+        <p><strong>System requirements:</strong> <%= pkg.SystemRequirements %></p>
+      <% } %>
+
       <% if (pkg.Package in revdeps) { %>
         <hr>
         <% var rd = revdeps[pkg.Package]; %>
