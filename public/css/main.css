@@ -133,9 +133,17 @@ p.alphatitle {
 }
 
 #tabpanel {
-    margin-top: 40px;
+    margin-top: 70px;
+}
+
+#tabpanel .tab-content {
+    padding-left: 10px;
 }
 
 .package-main .page-header {
     font-size: 300%;
+}
+
+.tab-pane {
+    margin-top: 10px;
 }

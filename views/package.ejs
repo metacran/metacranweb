@@ -13,7 +13,39 @@
 	<h2><%= pkg.Title %></h2>
 	<p><%- pkg.Description %></p>
       </div>
-      <% if (readme) { %><hr> <div id="readme"><%- readme %></div> <hr><% } %>
+
+      <% if (readme || news) { var active = "active"; %>
+        <div id="tabpanel">
+	  <ul class="nav nav-tabs" role="tablist">
+	    <% if (readme) { %><li role="presentation" class="<%= active %>">
+	      <a href="#README" aria-controls="README" role="tab" data-toggle="tab">
+		README
+	      </a>
+	    </li><% active = ""; } %>
+	    <% if (news) { %><li role="presentation" class="<%= active %>">
+	      <a href="#NEWS" aria-controls="NEWS" role="tab" data-toggle="tab">
+		NEWS
+	      </a>
+	    </li><% active = ""; } %>
+	  </ul>
+	  <div class="clearfix"></div>
+
+	  <% active = "active"; %>
+
+	  <div class="tab-content">
+	    <% if (readme) { %>
+	      <div role="tabpanel" class="tab-pane fade in <%= active %>" id="README">
+		<div id="readme"><%- readme %></div>
+	      </div>
+            <% active = ""; } %>
+	    <% if (news) { %>
+	      <div role="tabpanel" class="tab-pane fade in <%= active %> " id="NEWS">
+		<div id="news"><%- news %></div>
+	      </div>
+	    <% active = ""; } %>
+	  </div>
+	</div>
+      <% } %>
     </div>
 
     <div class="col-md-4 package-sidebar">
