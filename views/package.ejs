@@ -54,8 +54,9 @@
 	install.packages("<%= pkg.Package %>")
       </div>
       <hr>
-      <p><strong><%= pkg.Version %></strong>
-	by <strong><a href="/maint/<%= pkg.maintainer_email %>">
+      <p><a href="https://github.com/cran/<%= pkg.Package %>/commits">
+	  <strong><%= pkg.Version %></strong>
+	</a> by <strong><a href="/maint/<%= pkg.maintainer_email %>">
 	    <%= pkg.Maintainer %></a></strong>, <%= pkg.timeago %></p>
       <hr>
 
