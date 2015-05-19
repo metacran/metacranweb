@@ -6,6 +6,7 @@ var urls = require('../lib/urls');
 var handle_error = require('../lib/handle_error');
 var clean_package = require('../lib/clean_package');
 var pkg_link = require('../lib/pkg_link');
+var get_packages = require('../lib/get_packages');
 
 router.get('/', function(req, res) {
     var startkey = req.query.startkey || '';
@@ -52,26 +53,15 @@ router.get(re_full, function(req, res) {
     request(url, function(error, response, body) {
 	if (error || response.statusCode != 200) { return handle_error(res); }
 
-	var pkgnames = JSON.parse(body)
-	    .map(function(x) { return '"' + x[1] + '"'; });
+	var pkgnames = JSON.parse(body).map(function(x) { return x[1]; });
 	
-	var url2 = urls.crandb + '/-/versions?keys=[' + pkgnames.join(',') + ']';
-	request(url2, function(error, response, body) {
-	    if (error || response.statusCode != 200) {
-		return handle_error(res);
-	    }
-	    var pkgs = JSON.parse(body);
-	    var keys = Object.keys(pkgs);
-	    var pkg_array = [];
-	    for (k in keys) { pkg_array.push(pkgs[keys[k]]); }
-	    var cleanpkg = pkg_array.map(clean_package);
-	    if (!pkg_array[0]) { return handle_error(res); }
-	    var name = pkg_array[0].Maintainer;
+	get_packages(pkgnames, function(error, pkgs) {
+	    if (error || !pkgs[0]) { return handle_error(res); }
 	    
 	    res.render(
 		'pkglist',
-		{ 'pkgs': cleanpkg,
-		  'title': 'Packages by ' + name,
+		{ 'pkgs': pkgs,
+		  'title': 'Packages by ' + pkgs[0].Maintainer,
 		  'paging': false,
 		  'number': false
 		});
