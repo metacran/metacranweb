@@ -1,0 +1,42 @@
+<% include header %>
+<% include nav %>
+
+<div class="container task-view-list">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h2 class="page-header">Task Views</h2>
+    </div>
+  </div>
+
+  <% var w = 1; for (var i in task_views) { %>
+  <div class="row task-view-list-item">
+    <% if (w == 1) { %>
+      <div class="col-md-7 col-md-offset-1">
+	<h3><%= task_views[i].topic %>
+	  <small>&mdash; last updated on <%= task_views[i].version %></small></h3>
+	<p><%- task_views[i].summary %></p>
+	<a href="/ctv/<%= task_views[i].name%>" class="btn btn-default"
+	   role="button">More</a>
+      </div>
+      <div class="col-md-3 hidden-sm hidden-xs">
+	<img src="/img/<%= task_views[i].name %>.jpg" alt="" class="img-rounded">
+      </div>
+    <% } else { %>
+      <div class="col-md-3 col-md-offset-1 hidden-sm hidden-xs">
+	<img src="/img/<%= task_views[i].name %>.jpg" alt="" class="img-rounded">
+      </div>
+      <div class="col-md-7">
+	<h3><%= task_views[i].topic %>
+	  <small>&mdash; last updated on <%= task_views[i].version %></small></h3>
+	<p><%- task_views[i].summary %></p>
+	<a href="/ctv/<%= task_views[i].name%>" class="btn btn-default"
+	   role="button">More</a>
+      </div>
+    <% } %>
+  </div>
+  <% w = 1 - w; } %>
+
+</div>
+
+<% include links %>
+<% include footer %>

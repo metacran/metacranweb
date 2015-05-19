@@ -189,6 +189,30 @@ p.alphatitle {
     color: #000;
 }
 
+.task-view-list-item {
+    margin-bottom: 40px;
+    font-size: 1.2em;
+}
+
+.task-view-list-item img {
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.task-view-list-item h3 small,
+.task-view-page h2 small {
+    white-space: nowrap;
+}
+
+.task-view-page {
+    font-size: 1.2em;
+}
+
+.task-view-back {
+    margin-top: 20px;
+}
+
 .no-search-hits, .yes-search-hits {
     font-size: 1.5em;
 }

@@ -1,0 +1,85 @@
+<% include header %>
+<% include nav %>
+
+<div class="container task-view-page">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h2 class="page-header">Task view: <%= task_view.topic %>
+	<small>&mdash; last updated on <%= task_view.version %>,</small>
+	<small>by <%= task_view.maintainer %></small></h2>
+      
+      <div>
+	<ul class="nav nav-tabs" role="tablist">
+	  <li role="presentation" class="active">
+	    <a href="#Description" aria-controls="Description"
+	       role="tab" data-toggle="tab">
+	      Description
+	    </a>
+	  </li>
+	  <li role="presentation">
+	    <a href="#Packages" aria-controls="Packages" role="tab" data-toggle="tab">
+	      Packages
+	    </a>
+	  </li>
+	  <li role="presentation">
+	    <a href="#Links" aria-controls="Links" role="tab" data-toggle="tab">
+	      Links
+	    </a>
+	  </li>
+	</ul>
+	
+	<div class="tab-content">
+	  <div role="tabpanel" class="tab-pane fade in active" id="Description">
+	    <div id="description"><p><%- task_view.info %></p></div>
+	  </div>
+	  <div role="tabpanel" class="tab-pane fade in" id="Packages">
+	    <div id="packages">
+	      <% var i=1, j=1; for (pkg in pkgs) { %>
+	      <% if (i==4) { %> <div class="row"><% } %>
+		<div class="col-sm-3 text-center">
+		  <h3><a href="/pkg/<%= pkgs[pkg].Package %>">
+		      <strong>
+			<%= pkgs[pkg].Package %>
+		      </strong>
+		  </a></h3>
+		  <p>
+		    <%= pkgs[pkg].Title %> <br/>
+		    <%= pkgs[pkg].Version %>, published <%= pkgs[pkg].timeago %>
+		    by <a href="/maint/<%= pkgs[pkg].maintainer_email  %>">
+		      <%= pkgs[pkg].Maintainer %>
+		    </a>
+		  </p>
+		</div>
+		<% j++; if (i==4) { %></div><% i=1; } else { i=i+1; } %>
+	      <% } %>
+	    </div>
+	  </div>
+	  <div role="tabpanel" class="tab-pane fade in" id="Links">
+	    <div id="links"><ul>
+	      <% for (l in task_view.links) { %>
+	      <% var link = task_view.links[l]; %>
+	      <li><%- link %>
+	      <% } %>
+	    </ul></div>
+	  </div>
+	</div>
+	
+      </div>
+    </div>
+  </div>
+  
+  <div class="row task-view-back">
+    <div class="col-md-8 col-md-offset-2">
+      <p>
+	<a class="btn btn-default" href="/ctv" role="button">
+	  <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+	  Task view list
+	</a>
+      </p>
+    </div>
+  </div>
+  
+</div>
+  
+<% include links %>
+<% include footer %>

@@ -16,6 +16,7 @@ var trendinglist = require('./routes/trendinglist');
 var downloadlist = require('./routes/downloadlist');
 var mostrecent = require('./routes/mostrecent');
 var maint = require('./routes/maint');
+var task_views = require('./routes/task_views');
 
 var app = express();
 
@@ -40,6 +41,7 @@ app.use('/pkg', pkg);
 app.use('/maint', maint);
 app.use('/', search);
 app.use('/', routes);
+app.use('/ctv', task_views);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
