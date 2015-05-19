@@ -30,7 +30,9 @@ function do_query(req, res, query) {
 		    "query": { "multi_match": {
 			fields: ["Package^10", "Title^5", "Description^2",
 				 "Author^3", "Maintainer^4", "_all" ],
-			query: req.query['q'] } },
+			query: req.query['q'],
+			operator: "and"
+		    } },
 		    "functions": [
 			{
 			    "script_score": {
