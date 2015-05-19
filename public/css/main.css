@@ -188,3 +188,7 @@ p.alphatitle {
 .maint-list h3 a:visited {
     color: #000;
 }
+
+.no-search-hits, .yes-search-hits {
+    font-size: 1.5em;
+}
