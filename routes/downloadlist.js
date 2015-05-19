@@ -27,7 +27,8 @@ router.get('/', function(req, res) {
 		{ 'pkgs': pkg_array.map(clean_package),
 		  'title': 'Top downloaded packages',
 		  'paging': false,
-		  'number': false
+		  'number': false,
+		  'pagetitle': 'Top downloaded METACRAN'
 		});
 	})
     })

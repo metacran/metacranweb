@@ -32,6 +32,7 @@ function do_query(res, package) {
 	    if (err) { return handle_error(res, err) }
 	    results.pkg_link = pkg_link;
 	    results.pdf_url = "http://cran.rstudio.com/web/packages/";
+	    results.pagetitle = results.pkg.Package + ' @ METACRAN';
 	    res.render('package', results);
 	}
     )

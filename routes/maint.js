@@ -38,7 +38,8 @@ router.get('/', function(req, res) {
 	    })
 	    res.render('maint', { 'people': pp,
 				  'packages': packages,
-				  'pkg_link': pkg_link });
+				  'pkg_link': pkg_link,
+				  'pagetitle': 'METACRAN maintainers' });
 	})
     });
 })
@@ -63,7 +64,8 @@ router.get(re_full, function(req, res) {
 		{ 'pkgs': pkgs,
 		  'title': 'Packages by ' + pkgs[0].Maintainer,
 		  'paging': false,
-		  'number': false
+		  'number': false,
+		  'pagetitle': 'METACRAN maintainers'
 		});
 	})
     })

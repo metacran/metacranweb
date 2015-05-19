@@ -17,7 +17,8 @@ router.get('/', function(req, res) {
 	    { 'pkgs': pkg_array.map(clean_package),
 	      'title': 'Most recently updated packages',
 	      'paging': false,
-	      'number': false
+	      'number': false,
+	      'pagetitle': 'Most recent @ METACRAN'
 	    });
     })
 })

@@ -36,11 +36,11 @@ router.get('/', function(req, res) {
 });
 
 router.get('/about', function(req, res) {
-    res.render('about');
+    res.render('about', { 'pagetitle': 'About METACRAN' });
 })
 
 router.get('/services', function(req, res) {
-    res.render('services');
+    res.render('services', { 'pagetitle': 'METACRAN services' });
 })    
 
 module.exports = router;

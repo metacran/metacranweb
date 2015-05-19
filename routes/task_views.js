@@ -15,7 +15,8 @@ router.get('/', function(req, res) {
 	var tv = JSON.parse(body)
 	    .rows
 	    .map(function(x) { return x.doc.html; });
-	res.render('task_view_list', { 'task_views': tv });
+	res.render('task_view_list', { 'task_views': tv,
+				       'pagetitle': 'METACRAN task views' });
     })
 })
 
@@ -32,7 +33,8 @@ router.get(re_full, function(req, res) {
 	    if (error) { return handle_error(res); }
 	    res.render('task_view', { 'task_view': tv,
 				      'title': false,
-				      'pkgs': pkgs });
+				      'pkgs': pkgs,
+				      'pagetitle': 'METACRAN task views' });
 	})
     })
 })

@@ -64,7 +64,9 @@ function show_results(resp, req, res) {
 			   'no_hits': no_hits,
 			   'took': took,
 			   'hits': hits,
-			   'no_pages': no_pages   });
+			   'no_pages': no_pages,
+			   'pagetitle': 'METACRAN search results'
+			 });
 }
 
 function show_empty(res) {
