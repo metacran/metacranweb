@@ -1,0 +1,33 @@
+
+<div class="maint-box">
+  <div class="avatar text-center">
+    <img src="<%= photo %>" alt="" class="img-rounded">
+  </div>
+  <hr>
+  <div class="maint-data">
+    <p><strong><%= email %></strong></p>
+    <hr>
+
+    <% if (ghuser.login) { %>
+      <p>
+	<a href="https://github.com/<%= ghuser.login %>">
+	  <strong>@<%= ghuser.login %></strong>
+	</a>
+	at GitHub
+      </p>
+      <hr>
+    <% } %>
+
+    <% if (ghuser.company) { %><p><%= ghuser.company %></p><% } %>
+    <% if (ghuser.location) { %><p><%= ghuser.location %></p><% } %>
+    <% if (ghuser.company || ghuser.location) { %><hr><% } %>
+
+    <% if (ghuser.blog) { %>
+      <p><a href="<%= ghuser.blog %>"><strong><%= ghuser.blog %></strong></a></p><hr>
+    <% } %>
+
+
+
+
+  </div>
+</div>

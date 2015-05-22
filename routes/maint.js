@@ -1,12 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var async = require('async');
 var get_maint = require('../lib/get_maint');
 var urls = require('../lib/urls');
 var handle_error = require('../lib/handle_error');
-var clean_package = require('../lib/clean_package');
 var pkg_link = require('../lib/pkg_link');
-var get_packages = require('../lib/get_packages');
+var get_packages_by = require('../lib/get_packages_by');
+var get_photo_url = require('../lib/get_photo_url');
+var get_gh_username = require('../lib/get_gh_username');
 
 router.get('/', function(req, res) {
     var startkey = req.query.startkey || '';
@@ -48,27 +50,31 @@ re_full = new RegExp("^/(.+)$");
 router.get(re_full, function(req, res) {
 
     var maint = req.params[0];
-    var url = urls.crandb + '/-/maintainer?key=' +
-	encodeURIComponent(JSON.stringify(maint))
 
-    request(url, function(error, response, body) {
-	if (error || response.statusCode != 200) { return handle_error(res); }
+    async.parallel(
+	{
+	    'pkgs': function(cb) {
+		get_packages_by(maint, function(e, r) { cb(e, r)}) },
+	    'photo': function(cb) {
+		get_photo_url(maint, function(e, r) { cb(e, r)}) },
+	    'ghuser': function(cb) {
+		get_gh_username(maint, function(e, r) { cb(e, r)}) }
+	},
+	function(err, results) {
 
-	var pkgnames = JSON.parse(body).map(function(x) { return x[1]; });
-	
-	get_packages(pkgnames, function(error, pkgs) {
-	    if (error || !pkgs[0]) { return handle_error(res); }
+	    if (err) { return handle_error(res, err); }
+
+	    results.email = maint;
+	    results.title = 'Packages by ' + results.pkgs[0].Maintainer;
+	    results.paging = false;
+	    results.number = false;
+	    results.pagetitle = 'METACRAN maintainers';
+	    results.npr = 3;
+	    results.cw = "col-md-4";
 	    
-	    res.render(
-		'pkglist',
-		{ 'pkgs': pkgs,
-		  'title': 'Packages by ' + pkgs[0].Maintainer,
-		  'paging': false,
-		  'number': false,
-		  'pagetitle': 'METACRAN maintainers'
-		});
-	})
-    })
+	    res.render('maint1', results);
+	}
+    )
 })
 
 module.exports = router;

@@ -216,3 +216,12 @@ p.alphatitle {
 .no-search-hits, .yes-search-hits {
     font-size: 1.5em;
 }
+
+.maint-box {
+    margin-top: 90px;
+}
+
+.maint-data {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
