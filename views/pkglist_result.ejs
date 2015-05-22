@@ -2,7 +2,6 @@
 <% if (typeof npr === "undefined") { npr = 4; } %>
 <% if (typeof cw  === "undefined") { cw = "col-sm-3";   } %>
 
-<div class="container">
   <h1 class="page-header text-center"><%= title %></h1>
 
   <% if (paging) { %>
@@ -17,12 +16,12 @@
     </div>
   <% } %>
 
-  <% var i=1, j=1; for (pkg in pkgs) { %>
-    <% if (i == npr) { %> <div class="row"><% } %>
+  <div class="row"><% var no=0; for (var pkg in pkgs) { %>
+    <% if ( ! (+no % npr)) { %> </div><div class="row"><% } %>
         <div class="<%= cw %> text-center">
 	  <h3><a href="/pkg/<%= pkgs[pkg].Package %>">
 	      <strong>
-		<% if (number) { %><%= j %><% } %>
+		<% if (number) { %><%= no + 1 %><% } %>
 		<%= pkgs[pkg].Package %>
 	      </strong>
 	  </a></h3>
@@ -34,13 +33,9 @@
 	    </a>
 	  </p>
 	</div>
-    <% j++; if (i == npr) { %></div><% i=1; } else { i=i+1; } %>
-  <% } %>
-
-</div>
+  <% no++; } %></div>
 
 <% if (paging) { %>
-  <div class="container"
     <div class="row">
       <div class="col-sm-12 text-center">
 	<a class="btn btn-default"
@@ -48,5 +43,4 @@
 	   role="button">Next page</a>
       </div>
     </div>
-  </div>
 <% } %>
