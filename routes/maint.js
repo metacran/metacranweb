@@ -65,7 +65,8 @@ router.get(re_full, function(req, res) {
 	    if (err) { return handle_error(res, err); }
 
 	    results.email = maint;
-	    results.title = 'Packages by ' + results.pkgs[0].Maintainer;
+	    results.title = 'Packages by ' +
+		results.pkgs[0].Maintainer.replace(/^'(.*)'$/, '$1');
 	    results.paging = false;
 	    results.number = false;
 	    results.pagetitle = 'METACRAN maintainers';
