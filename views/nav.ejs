@@ -43,15 +43,17 @@
           </ul>
 	  <ul class="nav navbar-nav navbar-right">
 	    <li><form class="navbar-form navbar-left" role="search" action="/search.html">
-		<div class="form-group">
+		<div class="input-group">
 		  <input type="text" class="form-control input"
 			 id="cran-input" autofocus="autofocus"
 			 <% if (typeof q !== 'undefined') { %>value="<%= q %>"<% } %>
 			 placeholder="Search for a package name, keywords, people"
-			 name="q" size="50">
-		  <button type="button" class="btn btn-default">
-		    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-		  </button>
+			 name="q" size="41">
+		  <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+		      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+		    </button>
+		  </div>
 		</div>
 	      </form>
 	  </ul>
