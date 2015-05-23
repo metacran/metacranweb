@@ -3,33 +3,37 @@
 
 <div class="container task-view-list">
   <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-      <h2 class="page-header">Task Views</h2>
+    <div class="col-md-10">
+      <h1 class="page-header text-center">Task Views</h1>
     </div>
   </div>
 
   <% var w = 1; for (var i in task_views) { %>
   <div class="row task-view-list-item">
-    <% if (w == 1) { %>
-      <div class="col-md-7 col-md-offset-1">
-	<h3><%= task_views[i].topic %>
+    <% if (0) { %>
+      <div class="col-md-7">
+	<h3><a href="/ctv/<%= task_views[i].name %>"><%= task_views[i].topic %></a>
 	  <small>&mdash; last updated on <%= task_views[i].version %></small></h3>
-	<p><%- task_views[i].summary %></p>
+	<p class="lead"><%- task_views[i].summary %></p>
 	<a href="/ctv/<%= task_views[i].name%>" class="btn btn-default"
 	   role="button">More</a>
       </div>
-      <div class="col-md-3 hidden-sm hidden-xs">
-	<img src="/img/<%= task_views[i].name %>.jpg" alt="" class="img-rounded">
+      <div class="col-md-4 hidden-sm hidden-xs">
+	<a href="/ctv/<%= task_views[i].name%>">
+	  <img src="/img/<%= task_views[i].name %>-small.jpg" alt="" class="img-rounded">
+	</a>
       </div>
     <% } else { %>
-      <div class="col-md-3 col-md-offset-1 hidden-sm hidden-xs">
-	<img src="/img/<%= task_views[i].name %>.jpg" alt="" class="img-rounded">
+      <div class="col-md-4 hidden-sm hidden-xs">
+	<a href="/ctv/<%= task_views[i].name%>">
+	  <img src="/img/<%= task_views[i].name %>-small.jpg" alt="" class="img-rounded">
+	</a>
       </div>
       <div class="col-md-7">
-	<h3><%= task_views[i].topic %>
+	<h3><a href="/ctv/<%= task_views[i].name %>"><%= task_views[i].topic %></a>
 	  <small>&mdash; last updated on <%= task_views[i].version %></small></h3>
 	<p><%- task_views[i].summary %></p>
-	<a href="/ctv/<%= task_views[i].name%>" class="btn btn-default"
+	<a href="/ctv/<%= task_views[i].name %>" class="btn btn-default"
 	   role="button">More</a>
       </div>
     <% } %>
