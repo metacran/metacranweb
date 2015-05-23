@@ -16,11 +16,12 @@
       <% var active = "active"; %>
         <div id="tabpanel">
 	  <ul class="nav nav-tabs" role="tablist">
-	    <% if (readme) { %><li role="presentation" class="<%= active %>">
+	    <li role="presentation" class="<%= active %>">
 	      <a href="#README" aria-controls="README" role="tab" data-toggle="tab">
 		README
 	      </a>
-	    </li><% active = ""; } %>
+	    </li>
+	    <% active = ""; %>
 	    <% if (news) { %><li role="presentation" class="<%= active %>">
 	      <a href="#NEWS" aria-controls="NEWS" role="tab" data-toggle="tab">
 		NEWS
@@ -37,11 +38,19 @@
 	  <% active = "active"; %>
 
 	  <div class="tab-content">
-	    <% if (readme) { %>
 	      <div role="tabpanel" class="tab-pane fade in <%= active %>" id="README">
-		<div id="readme"><%- readme %></div>
+		<div id="readme">
+		  <% if (readme) { %>
+		    <%- readme %>
+		  <% } else { %>
+		    <div class="panel panel-default"><div class="panel-body">
+			This package does not have a README file, or least it is not included
+			in the built package.
+		    </div></div>
+		  <% } %>
+		</div>
 	      </div>
-            <% active = ""; } %>
+            <% active = ""; %>
 	    <% if (news) { %>
 	      <div role="tabpanel" class="tab-pane fade in <%= active %> " id="NEWS">
 		<div id="news"><%- news %></div>
