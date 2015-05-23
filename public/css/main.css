@@ -225,3 +225,11 @@ p.alphatitle {
     margin-top: 20px;
     font-size: 1.2em;
 }
+
+.page-header .pkg-icons {
+    margin-top: 10px;
+}
+
+.page-header .pkg-icons a {
+    color: #555;
+}
