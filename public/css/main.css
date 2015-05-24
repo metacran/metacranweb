@@ -233,3 +233,7 @@ p.alphatitle {
 .page-header .pkg-icons a {
     color: #555;
 }
+
+p.note {
+    color: #888;
+}

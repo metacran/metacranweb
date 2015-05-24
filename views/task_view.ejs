@@ -5,65 +5,43 @@
 
 <div class="container task-view-page">
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <h2 class="page-header">Task view: <%= task_view.topic %>
-	<small>&mdash; last updated on <%= task_view.version %>,</small>
-	<small>by <%= task_view.maintainer %></small></h2>
-      
-      <div>
-	<ul class="nav nav-tabs" role="tablist">
-	  <li role="presentation" class="active">
-	    <a href="#Description" aria-controls="Description"
-	       role="tab" data-toggle="tab">
-	      Description
-	    </a>
-	  </li>
-	  <li role="presentation">
-	    <a href="#Packages" aria-controls="Packages" role="tab" data-toggle="tab">
-	      Packages
-	    </a>
-	  </li>
-	  <li role="presentation">
-	    <a href="#Links" aria-controls="Links" role="tab" data-toggle="tab">
-	      Links
-	    </a>
-	  </li>
-	</ul>
-	
-	<div class="tab-content">
-	  <div role="tabpanel" class="tab-pane fade in active" id="Description">
-	    <div id="description"><p><%- task_view.info %></p></div>
-	  </div>
-	  <div role="tabpanel" class="tab-pane fade in" id="Packages">
-	    <div id="packages">
-	      <%- include('pkglist_result', { 'pkgs': pkgs }); %>
-	    </div>
-	  </div>
-	  <div role="tabpanel" class="tab-pane fade in" id="Links">
-	    <div id="links"><ul>
-	      <% for (l in task_view.links) { %>
-	      <% var link = task_view.links[l]; %>
-	      <li><%- link %>
-	      <% } %>
-	    </ul></div>
-	  </div>
-	</div>
-	
-      </div>
+    <div class="col-md-12">
+      <h1 class="page-header">Task view: <%= task_view.topic %></h1>
     </div>
   </div>
-  
-  <div class="row task-view-back">
-    <div class="col-md-8 col-md-offset-2">
+
+  <div class="row">
+    <div class="col-md-5">
+      <p class="note">
+	Last updated on <%= task_view.version %>
+	by <%= task_view.maintainer %>
+      </p>
+      <p><%- task_view.info %></p>
+      <h2 class="page-header">Links</h2>
       <p>
-	<a class="btn btn-default" href="/ctv" role="button">
-	  <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
-	  Task view list
-	</a>
+	<ul>
+	  <% for (l in task_view.links) { %>
+	    <% var link = task_view.links[l]; %>
+	    <li><%- link %>
+	  <% } %>
+	</ul>
+      </p>
+    </div>
+    <div class="col-md-6 col-md-offset-1">
+      <p>
+	<%- include('pkglist_result', { 'pkgs': pkgs,
+	    'npr': 3,
+	    'cw': 'col-sm-4' }); %>
       </p>
     </div>
   </div>
-  
+
+  <hr>
+  <p><a class="btn btn-default" href="/ctv" role="button">
+      <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+      Task view list
+  </a></p>
+
 </div>
   
 <% include links %>
