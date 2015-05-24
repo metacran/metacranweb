@@ -1,8 +1,14 @@
+<!---- -*- mode: html -*-  --->
 
-<% if (typeof npr === "undefined") { npr = 4; } %>
-<% if (typeof cw  === "undefined") { cw = "col-sm-3";   } %>
+<% if (typeof npr    === "undefined") { npr    = 4;          } %>
+<% if (typeof cw     === "undefined") { cw     = "col-sm-3"; } %>
+<% if (typeof paging === "undefined") { paging = false;      } %>
+<% if (typeof number === "undefined") { number = false;      } %>
+<% if (typeof title  === "undefined") { title  = false;      } %>
 
-  <h1 class="page-header text-center"><%= title %></h1>
+  <% if (title) { %>
+    <h1 class="page-header text-center"><%= title %></h1>
+  <% } %>
 
   <% if (paging) { %>
     <div class="row starting-letters">
