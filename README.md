@@ -46,7 +46,7 @@ Tips:
 Technology used in the app itself:
 
 - [express.js](http://expressjs.com/)
-- [ejs](http://www.embeddedjs.com/) templates
+- [ejs](https://github.com/mde/ejs) templates
 - [request](https://github.com/request/request) for running queries
 - [elasticsearch](https://github.com/elastic/elasticsearch-js)
   client to connect to the package search service
