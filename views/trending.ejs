@@ -1,4 +1,11 @@
+<!---- -*- mode: html -*-  --->
+
 <div class="container">
-  <h2 class="page-header text-center"><a href="/trending">Trending this week</a></h2>
+  <h2 class="page-header text-center">
+    <a href="/trending" data-toggle="tooltip" data-placement="right"
+       title="Percent increase in downloads last week, from the RStudio mirror, compared to last six months. Only packages with at least 1,000 downloads last week.">
+      Trending this week
+    </a>
+  </h2>
   <%- include('featured', { pkgs: trending }); %>
 </div>

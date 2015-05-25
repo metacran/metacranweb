@@ -1,4 +1,11 @@
+<!---- -*- mode: html -*-  --->
+
 <div class="container">
-  <h2 class="page-header text-center"><a href="/recent">Recently updated</a></h2>
+  <h2 class="page-header text-center">
+    <a href="/recent" data-toggle="tooltip" data-placement="right"
+       title="Includes new packages as well">
+      Recently updated
+    </a>
+  </h2>
   <%- include('featured', { pkgs: recent }); %>
 </div>

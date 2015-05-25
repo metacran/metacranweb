@@ -1,4 +1,11 @@
+<!---- -*- mode: html -*-  --->
+
 <div class="container">
-  <h2 class="page-header text-center"><a href="/downloaded">Most downloaded</a></h2>
+  <h2 class="page-header text-center">
+    <a href="/downloaded" data-toggle="tooltip" data-placement="right"
+       title="Most downloads last week, from the RStudio mirror">
+      Most downloaded
+    </a>
+  </h2>
   <%- include('featured', { pkgs: downloads }); %>
 </div>
