@@ -23,7 +23,10 @@
       <p class="task-view-title">
 	<a href="/ctv/<%= task_views[i].name%>">
 	  <strong><%= task_views[i].topic %></strong>
-	</a>
+	</a><br>
+      </p>
+      <p class="task-view-title-author">
+	<i class="fa fa-user"></i> <%= task_views[i].maintainer %>
       </p>
       <div class="task-view-bottom">
 	<p class="task-view-title-time">
