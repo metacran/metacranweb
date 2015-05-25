@@ -245,7 +245,7 @@ p.note {
 
 .task-view-title {
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     margin-left: 10px;
     margin-right: 10px;
     font-size: 110%;
@@ -286,6 +286,7 @@ p.note {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    position: relative;
 }
 
 .task-item-inner {
@@ -301,6 +302,11 @@ p.note {
 .task-item img {
     width: 100%;
     display: block;
+}
+
+.task-view-bottom {
+    position: absolute;
+    bottom: 0;
 }
 
 @media screen and ( max-width: 60em ) {

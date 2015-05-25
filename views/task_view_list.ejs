@@ -25,12 +25,11 @@
 	  <strong><%= task_views[i].topic %></strong>
 	</a>
       </p>
-      <p class="task-view-title-author">
-	<i class="fa fa-user"></i> <%= task_views[i].maintainer %>
-      </p>
-      <p class="task-view-title-time">
-	<i class="fa fa-clock-o"></i> <%= task_views[i].version %>
-      </p>
+      <div class="task-view-bottom">
+	<p class="task-view-title-time">
+	  <i class="fa fa-clock-o"></i> <%= task_views[i].version %>
+	</p>
+      </div>
     </div>
   </div>
 
