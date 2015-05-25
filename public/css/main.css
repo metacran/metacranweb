@@ -311,7 +311,7 @@ p.note {
     bottom: 0;
 }
 
-@media screen and ( max-width: 60em ) {
+@media screen and ( max-width: 80em ) {
     .task-item {
 	width: 19%;
     }
@@ -322,7 +322,7 @@ p.note {
     }
 }
 
-@media screen and ( max-width: 50em ) {
+@media screen and ( max-width: 63em ) {
     .task-item {
 	width: 24%;
     }
@@ -334,7 +334,7 @@ p.note {
 }
 
 
-@media screen and ( max-width: 40em ) {
+@media screen and ( max-width: 50em ) {
     .task-item {
 	width: 33%;
     }
@@ -377,4 +377,8 @@ p.note {
     padding-right: 30px;
     border-right: 1px solid;
     border-color: #eee;
+}
+
+.bottom-note {
+    margin-top: 30px;
 }
