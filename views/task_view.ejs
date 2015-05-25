@@ -11,7 +11,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-6 task-view-left">
       <p class="note">
 	Last updated on <%= task_view.version %>
 	by <%= task_view.maintainer %>
@@ -27,7 +27,8 @@
 	</ul>
       </p>
     </div>
-    <div class="col-md-6 col-md-offset-1">
+    <div class="col-md-6">
+      <h2 class="text-center">Packages</h2>
       <p>
 	<%- include('pkglist_result', { 'pkgs': pkgs,
 	    'npr': 3,

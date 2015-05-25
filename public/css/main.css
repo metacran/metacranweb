@@ -372,3 +372,9 @@ p.note {
 	margin-left: 0;
     }
 }
+
+.task-view-left {
+    padding-right: 30px;
+    border-right: 1px solid;
+    border-color: #eee;
+}
