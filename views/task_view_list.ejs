@@ -11,42 +11,32 @@
   </div>
 </div>
 
-<div class="container task-view-list">
+<div class="container task-view-list text-center">
 
-  <% for (var i in task_views) { %>
-  <div class="task-item">
-    <div class="task-item-inner">
-      <div class="task-img-wrapper">
-	<a href="/ctv/<%= task_views[i].name%>">
-	  <img src="/img/<%= task_views[i].name %>-small.jpg" alt=""
-	       class="task-view-image">
-	</a>
-      </div>
-      <p class="task-view-title">
-	<a href="/ctv/<%= task_views[i].name%>">
-	  <strong><%= task_views[i].topic %></strong>
-	</a><br>
-      </p>
-      <p class="task-view-title-author">
-	<i class="fa fa-user"></i> <%= task_views[i].maintainer %>
-      </p>
-      <div class="task-view-bottom">
-	<p class="task-view-title-time">
-	  <i class="fa fa-clock-o"></i> <%= task_views[i].version %>
-	</p>
-      </div>
+  <div class="row">
+    <% var i=0; while (i < task_views.length) { %>
+    <% if (! (i % 3)) { %></div><div class="row"><% } %>
+
+    <div class="col-sm-4">
+      <a href="/ctv/<%= task_views[i].name%>">
+	<div class="task-view-well">
+	  <p class="task-view-topic">
+	    <strong><%= task_views[i].topic %></strong>
+	    <br>
+	  </p>
+	  <p class="task-view-author">
+	    <%= task_views[i].maintainer %>
+	  </p>
+	  <p class="task-view-date">
+	    <%= task_views[i].version %>
+	  </p>
+	</div>
+      </a>
     </div>
+
+    <% i++; } %>
+
   </div>
-
-  <% } %>
-
-</div>
-
-<div class="container">
-  <p class="note text-center bottom-note">
-    Images from <a href="http://www.freeimages.com">freeimages.com</a>,
-    selected by <a href="http://barry.rowlingson.com/">Barry Rowlingson</a>.
-  </p>
 </div>
 
 <% include links %>
