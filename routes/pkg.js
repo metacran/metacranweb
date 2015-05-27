@@ -4,6 +4,7 @@ var get_package = require('../lib/get_package');
 var get_revdeps = require('../lib/get_revdeps');
 var get_readme = require('../lib/get_readme');
 var get_news = require('../lib/get_news');
+var get_pkg_tvs = require('../lib/get_pkg_tvs');
 var async = require('async');
 var handle_error = require('../lib/handle_error');
 var pkg_link = require('../lib/pkg_link');
@@ -26,7 +27,9 @@ function do_query(res, package) {
 	    'readme': function(cb) {
 		get_readme(package, function(e, r) { cb(e, r)}) },
 	    'news': function(cb) {
-		get_news(package, function(e, r) { cb(e, r)}) }
+		get_news(package, function(e, r) { cb(e, r)}) },
+	    'taskviews': function(cb) {
+		get_pkg_tvs(package, function(e, r) { cb(e, r)}) }
 	},
 	function(err, results) {
 	    if (err) { return handle_error(res, err) }

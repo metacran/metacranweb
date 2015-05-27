@@ -106,6 +106,17 @@
       </p>
       <hr>
 
+      <% if (taskviews) { %>
+        <p>
+	  <strong>Task views:</strong>
+	  <% for (i in taskviews) { var tv = taskviews[i].split(':'); %>
+	    <a href="/ctv/<%= tv[0].trim() %>">
+	    <%= tv[1].trim() %></a><% if (i != taskviews.length - 1) { %>,<% } %>
+	  <% } %>
+	</p>
+	<hr>
+      <% } %>
+
       <% if (pkg.License) { %><p><strong><%= pkg.License %></strong>
 	license</p><hr><% } %>
       <% if (pkg.Imports) { %>
