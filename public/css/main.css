@@ -301,9 +301,31 @@ p.note {
     box-shadow: 0 0.125rem 0.313rem rgba( 0, 0, 0, .2 ); /* 2 5 */
 }
 
+div.task-item-inner:hover {
+    background: #ccc;
+}
+
 .task-item img {
     width: 100%;
     display: block;
+
+    -webkit-transition: all 1s ease;
+       -moz-transition: all 1s ease;
+         -o-transition: all 1s ease;
+	-ms-transition: all 1s ease;
+	    transition: all 1s ease;
+}
+
+.task-img-wrapper {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.task-item img:hover {
+       -moz-transform: scale(1.5);
+         -o-transform: scale(1.5);
+	-ms-transform: scale(1.5);
+	    transform: scale(1.5);
 }
 
 .task-view-bottom {

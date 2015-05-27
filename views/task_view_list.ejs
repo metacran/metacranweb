@@ -16,10 +16,12 @@
   <% for (var i in task_views) { %>
   <div class="task-item">
     <div class="task-item-inner">
-      <a href="/ctv/<%= task_views[i].name%>">
-	<img src="/img/<%= task_views[i].name %>-small.jpg" alt=""
-	     class="task-view-image">
-      </a>
+      <div class="task-img-wrapper">
+	<a href="/ctv/<%= task_views[i].name%>">
+	  <img src="/img/<%= task_views[i].name %>-small.jpg" alt=""
+	       class="task-view-image">
+	</a>
+      </div>
       <p class="task-view-title">
 	<a href="/ctv/<%= task_views[i].name%>">
 	  <strong><%= task_views[i].topic %></strong>
