@@ -1,18 +1,18 @@
 <!---- -*- mode: html -*-  --->
 
 <% if (typeof npr    === "undefined") { npr    = 4;          } %>
-<% if (typeof cw     === "undefined") { cw     = "col-sm-3"; } %>
+<% if (typeof cw     === "undefined") { cw     = "col-lg-3 col-md-6"; } %>
 <% if (typeof paging === "undefined") { paging = false;      } %>
 <% if (typeof number === "undefined") { number = false;      } %>
 <% if (typeof title  === "undefined") { title  = false;      } %>
 
   <% if (title) { %>
-    <h1 class="page-header text-center"><%= title %></h1>
+    <h1 class="page-header"><%= title %></h1>
   <% } %>
 
   <% if (paging) { %>
     <div class="row starting-letters">
-      <div class="col-md-12 text-center">
+      <div class="col-md-12">
 	&middot
 	<% for (var i = 65; i <= 90; i++) { %>
 	   <% var c = String.fromCharCode(i); %>
@@ -22,28 +22,36 @@
     </div>
   <% } %>
 
-  <div class="row"><% var no=0; for (var pkg in pkgs) { %>
-    <% if ( ! (+no % npr)) { %> </div><div class="row"><% } %>
-        <div class="<%= cw %> text-center">
-	  <h3><a href="/pkg/<%= pkgs[pkg].Package %>">
+  <div class="packagelist">
+    <% var no=0; for (var pkg in pkgs) { %>
+        <div class="<%= cw %>"><div class="package-list-item">
+	  <h3><span class="glyphicon glyphicon-gift package-icon" aria-hidden="true"></span>
+	      <a href="/pkg/<%= pkgs[pkg].Package %>">
 	      <strong>
 		<% if (number) { %><%= no + 1 %><% } %>
 		<%= pkgs[pkg].Package %>
 	      </strong>
-	  </a></h3>
-          <p>
-	    <%= pkgs[pkg].Title %> <br/>
-	    <%= pkgs[pkg].Version %>, published <%= pkgs[pkg].timeago %>
+	      </a>
+	      <small> &mdash; <%= pkgs[pkg].Version %></small>
+	  </h3>
+          <p class="package-list-dateline">
+	    <span class="package-list-date"><%= pkgs[pkg].timeago %></span>
 	    by <a href="/maint/<%= pkgs[pkg].maintainer_email  %>">
 	      <%= pkgs[pkg].Maintainer %>
 	    </a>
+	  </p><p>
+	    <%= pkgs[pkg].Title %>
 	  </p>
-	</div>
-  <% no++; } %></div>
+	</div></div>
+	<% no++; %>
+	<% if ( ! (+no % npr)) { %><div class="clearfix visible-lg-block"></div><% } %>
+	<% if ( ! (+no % (npr/2))) { %><div class="clearfix visible-md-block"></div><% } %>
+  <% } %></div>
+  </div>
 
 <% if (paging) { %>
-    <div class="row">
-      <div class="col-sm-12 text-center">
+    <div class="wide-container next-button">
+      <div class="col-sm-12">
 	<a class="btn btn-default"
 	   href="?startkey=<%= pkgs[pkg].Package %>"
 	   role="button">Next page</a>

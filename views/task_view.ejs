@@ -3,7 +3,7 @@
 <% include header %>
 <% include nav %>
 
-<div class="container task-view-page">
+<div class="container wide-container task-view-page">
   <div class="row">
     <div class="col-md-12">
       <h1 class="page-header">Task view: <%= task_view.topic %></h1>
@@ -28,20 +28,22 @@
       </p>
     </div>
     <div class="col-md-6">
-      <h2 class="text-center">Packages</h2>
+      <h2 style="padding-left:17px;">Packages</h2>
       <p>
 	<%- include('pkglist_result', { 'pkgs': pkgs,
-	    'npr': 3,
-	    'cw': 'col-sm-4' }); %>
+	    'npr': 2,
+	    'cw': 'col-sm-6' }); %>
       </p>
     </div>
   </div>
 
   <hr>
-  <p><a class="btn btn-default" href="/ctv" role="button">
-      <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
-      Task view list
-  </a></p>
+  <div class="container wide-container"><div class="col-xs-12">
+    <p><a class="btn btn-default" href="/ctv" role="button">
+	<span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+	Task view list
+    </a></p>
+  </div></div>
 
 </div>
   

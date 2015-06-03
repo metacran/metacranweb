@@ -1,11 +1,13 @@
+<!---- -*- mode: html -*-  --->
+
 <% include header %>
 <% include nav %>
 
-<div class="container maint-list">
-  <h2 class="page-header text-center">Package maintainers</h2>
+<div class="container wide-container maint-list">
+  <h1 class="page-header">Package maintainers</h1>
 
   <div class="row starting-letters">
-    <div class="col-md-12 text-center">
+    <div class="col-md-12">
       &middot
       <% for (var i = 65; i <= 90; i++) { %>
 	 <% var c = String.fromCharCode(i); %>
@@ -15,24 +17,28 @@
   </div>
 
 
-  <% var i=1, j=1; for (ptr in people) { %>
-  <% if (i==4) { %> <div class="row"><% } %>
-    <div class="col-sm-3 text-center">
-      <h3><a href="/maint/<%= people[ptr].email %>">
-	  <strong>
-	    <%= people[ptr].name %>
-	  </strong>
-      </a></h3>
+  <div class="maint-list-inner">
+  <% var j=1; for (ptr in people) { %>
+    <div class="col-md-6 maintlist-box">
+      <h3>
+	<span class="maint-span">
+	  <span class="glyphicon glyphicon-user maintlist-icon" aria-hidden="true"></span>
+	  <a href="/maint/<%= people[ptr].email %>">
+	    <strong>
+	      <%= people[ptr].name %>
+	    </strong>
+	</a></span>
+      </h3>
       <p><%- packages[people[ptr].email].map(pkg_link).join(', '); %></p>
     </div>
-  <% j++; if (i==4) { %></div><% i=1; } else { i=i+1; } %>
-  <% } %>
-
+    <% if (! (+j % 2)) { %><div class="clearfix"></div><% } %>
+  <% j++; } %>
+  </div>
 </div>
 
-<div class="container"
+<div class="container wide-container next-button"
      <div class="row">
-       <div class="col-sm-12 text-center">
+       <div class="col-sm-12">
 	 <a class="btn btn-default"
 	    href="?startkey=<%= people[ptr].name %>"
 	    role="button">Next page</a>

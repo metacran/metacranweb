@@ -186,7 +186,15 @@ p.alphatitle {
 }
 
 .maint-list h3 a:visited {
+    color: #777;
+}
+
+.packagelist h3 a {
     color: #000;
+}
+
+.packagelist h3 a:visited {
+    color: #777;
 }
 
 .no-search-hits, .yes-search-hits {
@@ -224,13 +232,20 @@ p.note {
     margin-top: 30px;
 }
 
-.task-view-topic {
-    font-size: 130%;
+.task-view-list a {
+    color: #000;
+}
+
+.task-view-list a:visited {
+    color: #777;
 }
 
 .task-view-well {
-    min-height: 14em;
-    height: 100%;
+    padding-bottom: 30px;
+}
+
+.task-view-topic {
+    font-size: 130%;
 }
 
 .task-view-author {
@@ -239,4 +254,58 @@ p.note {
 
 .task-view-date {
     color: #555;
+}
+
+.task-view-list p {
+    padding-left: 27px;
+}
+
+.package-icon {
+    color: #999;
+    font-size: 80%;
+}
+
+.package-list-item p {
+    padding-left: 27px;
+}
+
+.package-list-item {
+    margin-bottom: 20px;
+}
+
+.wide-container {
+    margin-right: 30px;
+    margin-left: 30px;
+    width: auto;
+}
+
+.package-list-dateline {
+    color: #999;
+    font-size: 80%;
+}
+
+.packagelist p {
+    margin-bottom: 2px;
+}
+
+.maintlist-icon {
+    color: #999;
+    font-size: 80%;
+}
+
+.maintlist-box {
+    padding-left: 0px;
+}
+
+.maintlist-box p {
+    padding-left: 27px;
+    max-width: 450px;
+}
+
+.next-button {
+    padding-left: 40px;
+}
+
+.maint-span {
+    white-space: nowrap;
 }
