@@ -305,3 +305,7 @@ p.note {
 .package-name-title {
     font-size: 100%;
 }
+
+#readme img {
+    max-width: 800px;
+}
