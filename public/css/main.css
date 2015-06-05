@@ -118,18 +118,6 @@ p.alphatitle {
     border: 0px;
 }
 
-#readme h1 {
-    font-size: 130%;
-}
-
-#readme h2 {
-    font-size: 115%;
-}
-
-#readme h3,h4,h5,h6,h7 {
-    font-size: 100%;
-}
-
 #tabpanel {
     margin-top: 70px;
 }
@@ -308,4 +296,12 @@ p.note {
 
 .maint-span {
     white-space: nowrap;
+}
+
+.readme-badge {
+    display: none;
+}
+
+.package-name-title {
+    font-size: 100%;
 }

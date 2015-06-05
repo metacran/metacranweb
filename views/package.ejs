@@ -1,3 +1,5 @@
+<!---- -*- mode: html -*-  --->
+
 <% include header %>
 <% include nav %>
 
@@ -27,15 +29,16 @@
 	    </a>
 	  </div>
 	</div>
-	<h1><%= pkg.Package %></h1>
+	<h1 class="package-name-title"><%= pkg.Package %></h1>
       </div>
 
       <div class="tab-content">
 	<div role="tabpanel" class="tab-pane fade in active" id="README">
 
 	  <div>
-	    <h2><%= pkg.Title %></h2>
+	    <h1><%= pkg.Title %></h1>
 	    <p class="lead"><%- pkg.Description %></p>
+	    <hr>
 	  </div>
 	  <div id="readme">
 	    <% if (readme) { %>
