@@ -10,6 +10,14 @@
       <div class="page-header">
 	<div class="btn-toolbar pull-right pkg-icons">
 	  <div class="btn-group" role="tab-list">
+	    <% if (stars) { %>
+	    <a href="https://github.com/<%= github_repo %>"
+	       class="btn btn-default" title="View on GitHub">
+	      <i class="fa fa-star fa-lg"></i>&nbsp; <%= stars %>
+	    </a>
+	    <% } %>
+	  </div>
+	  <div class="btn-group" role="tab-list">
 	    <a href="#README" aria-control="README" role="tab"
 	       data-toggle="tab" class="btn btn-default"
 	       title="Package page">
@@ -176,6 +184,11 @@
 
   </div>
 </div>
+
+<!-- Place this tag right after the last button or just before your close body tag. -->
+<% if (github_repo[0]) { %>
+<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+<% } %>
 
 <% include links %>
 <% include footer %>

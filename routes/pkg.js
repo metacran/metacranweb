@@ -5,9 +5,11 @@ var get_revdeps = require('../lib/get_revdeps');
 var get_readme = require('../lib/get_readme');
 var get_news = require('../lib/get_news');
 var get_pkg_tvs = require('../lib/get_pkg_tvs');
+var get_gh_stars = require('../lib/get_gh_stars');
 var async = require('async');
 var handle_error = require('../lib/handle_error');
 var pkg_link = require('../lib/pkg_link');
+var meta = require('metacran-node');
 
 re_full = new RegExp("^/([\\w\\.]+)$", 'i');
 
@@ -29,11 +31,14 @@ function do_query(res, package) {
 	    'news': function(cb) {
 		get_news(package, function(e, r) { cb(e, r)}) },
 	    'taskviews': function(cb) {
-		get_pkg_tvs(package, function(e, r) { cb(e, r)}) }
+		get_pkg_tvs(package, function(e, r) { cb(e, r)}) },
+	    'stars': function(cb) {
+		get_gh_stars(package, function(e, r) { cb(e, r)}) }
 	},
 	function(err, results) {
 	    if (err) { return handle_error(res, err) }
 	    results.pkg_link = pkg_link;
+	    results.github_repo = meta.get_gh_repo(results.pkg);
 	    results.pdf_url = "http://cran.rstudio.com/web/packages/";
 	    results.pagetitle = results.pkg.Package + ' @ METACRAN';
 	    res.render('package', results);
