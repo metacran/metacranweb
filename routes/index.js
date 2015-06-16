@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var top_starred = require('../lib/top_starred');
 var top_downloaded = require('../lib/top_downloaded');
+var top_revdeps = require('../lib/top_revdeps');
 var trending = require('../lib/trending');
 var recent = require('../lib/recent');
 var num_active = require('../lib/num_active');
@@ -29,7 +30,9 @@ router.get('/', function(req, res) {
 	  'trending': function(cb) {
 	    trending(function(e, r) { cb(e, r) }) },
 	  'recent': function(cb) {
-	    recent(function(e, r) { cb(e, r) }) }
+	    recent(function(e, r) { cb(e, r) }) },
+	  'toprevdeps': function(cb) {
+	    top_revdeps(function(e, r) { cb(e, r) }) }
 	},
 	function(err, results) {
 	    if (err) { return handle_error(res, err); }

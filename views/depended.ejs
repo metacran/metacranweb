@@ -1,0 +1,11 @@
+<!---- -*- mode: html -*-  --->
+
+<div class="container wide-container">
+  <h1 class="page-header text-center">
+    <a href="/depended" data-toggle="tooltip" data-placement="right"
+       title="Including all kinds of dependencies.">
+      Most depended upon
+    </a>
+  </h1>
+  <%- include('featured', { pkgs: toprevdeps }); %>
+</div>
