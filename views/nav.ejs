@@ -50,11 +50,16 @@
 	  <ul class="nav navbar-nav navbar-right">
 	    <li><form class="navbar-form navbar-left" role="search" action="/search.html">
 		<div class="input-group">
-		  <input type="text" class="form-control input"
+		  <input type="text" class="form-control input visible-sm-inline visible-xs-inline"
 			 id="cran-input" autofocus="autofocus"
 			 <% if (typeof q !== 'undefined') { %>value="<%= q %>"<% } %>
 			 placeholder="Search for packages"
-			 name="q" size="18">
+			 name="q" size="17">
+		  <input type="text" class="form-control input hidden-xs hidden-sm"
+			 id="cran-input" autofocus="autofocus"
+			 <% if (typeof q !== 'undefined') { %>value="<%= q %>"<% } %>
+			 placeholder="Search for packages"
+			 name="q" size="45">
 		  <div class="input-group-btn">
                     <button class="btn btn-default" type="submit">
 		      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
