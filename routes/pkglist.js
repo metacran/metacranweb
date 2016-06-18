@@ -17,7 +17,9 @@ function do_query(res, from, query) {
     var url = urls.crandb + '/-/latest?limit=100&startkey="' +
 	startkey + '"';
     request(url, function(error, response, body) {
-	if (error || response.statusCode != 200) { return handle_error(res); }
+	if (error || response.statusCode != 200) {
+	    return handle_error(res, error || response.statusCode);
+	}
 	var pkgs = JSON.parse(body);
 	for (p in pkgs) { pkgs[p] = clean_package(pkgs[p]); }
 	res.render('pkglist', { 'pkgs': pkgs,

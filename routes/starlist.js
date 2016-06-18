@@ -10,14 +10,16 @@ router.get('/', function(req, res) {
     var url = urls.docsdb + '/gh-stars/_design/app/_view/' +
 	'num_stars?descending=true&limit=100';
     request(url, function(error, response, body) {
-	if (error || response.statusCode != 200) { return handle_error(res); }
+	if (error || response.statusCode != 200) {
+	    return handle_error(res, error || response.statusCode);
+	}
 	var pkgnames = JSON.parse(body)
 	    .rows
 	    .map(function(x) { return '"' + x.id + '"'; });
 	var url2 = urls.crandb + '/-/versions?keys=[' + pkgnames.join(',') + ']';
 	request(url2, function(error, response, body) {
 	    if (error || response.statusCode != 200) {
-		return handle_error(res);
+		return handle_error(res, error || response.statusCode);
 	    }
 	    var pkgs = JSON.parse(body);
 	    var keys = Object.keys(pkgs);

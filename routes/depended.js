@@ -3,7 +3,6 @@ var router = express.Router();
 var request = require('request');
 var cache = require('../lib/cache');
 var urls = require('../lib/urls');
-var handle_error = require('../lib/handle_error');
 var clean_package = require('../lib/clean_package');
 
 router.get('/', function(req, res) {

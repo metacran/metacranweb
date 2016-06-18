@@ -70,7 +70,9 @@ function do_query(res, package, query) {
 
     var url = 'http://crandb.r-pkg.org/-/desc?keys=["' + package + '"]';
     request(url, function(error, response, body) {
-	if (error || response.statusCode != 200) { return handle_error(res); }
+	if (error || response.statusCode != 200) {
+	    return handle_error(res, error || response.statusCode);
+	}
 	var pbody = JSON.parse(body);
 	var message = "not published";
 	if (pbody[package]) {

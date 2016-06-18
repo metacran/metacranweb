@@ -11,7 +11,9 @@ var get_packages = require('../lib/get_packages');
 router.get('/', function(req, res) {
     var url = urls.docsdb + '/task-view/_all_docs?include_docs=true';
     request(url, function(error, response, body) {
-	if (error || response.statusCode != 200) { return handle_error(res); }
+	if (error || response.statusCode != 200) {
+	    return handle_error(res, error || response.statusCode);
+	}
 	var tv = JSON.parse(body)
 	    .rows
 	    .map(function(x) { return x.doc.html; });
@@ -27,10 +29,12 @@ router.get(re_full, function(req, res) {
     var tv = req.params[0];
     var url = urls.docsdb + '/task-view/' + tv;
     request(url, function(error, response, body) {
-	if (error || response.statusCode != 200) { return handle_error(res); }
+	if (error || response.statusCode != 200) {
+	    return handle_error(res, error || response.statusCode);
+	}
 	var tv = tv_linkify(JSON.parse(body).html);
 	get_packages(tv.packagelist, function(error, pkgs) {
-	    if (error) { return handle_error(res); }
+	    if (error) { return handle_error(res, error); }
 	    res.render('task_view', { 'task_view': tv,
 				      'title': false,
 				      'pkgs': pkgs,

@@ -16,7 +16,9 @@ router.get('/', function(req, res) {
 	'/-/maintainernames?group_level=2&limit=100&startkey=["' +
 	startkey + '"]';
     request(url, function(error, response, body) {
-	if (error || response.statusCode != 200) { return handle_error(res); }
+	if (error || response.statusCode != 200) {
+	    return handle_error(res, error || response.statusCode);
+	}
 	var pp = JSON.parse(body)
 	    .map(function(x) { return { 'name': x[0][0],
 					'email': x[0][1],
@@ -27,7 +29,7 @@ router.get('/', function(req, res) {
 
 	request(url2, function(error, response, body) {
 	    if (error || response.statusCode != 200) {
-		return handle_error(res);
+		return handle_error(res, error || response.statusCode);
 	    }
 	    var packages = {};
 	    JSON.parse(body).map(function(x) {

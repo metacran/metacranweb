@@ -9,14 +9,16 @@ router.get('/', function(req, res) {
 
     var url = urls.cranlogs + '/top/last-week/100';
     request(url, function(error, response, body) {
-	if (error || response.statusCode != 200) { return handle_error(res); }
+	if (error || response.statusCode != 200) {
+	    return handle_error(res, error || response.statusCode);
+	}
 	var pkgnames = JSON.parse(body)
 	    .downloads
 	    .map(function(x) { return '"' + x.package + '"'; });
 	var url2 = urls.crandb + '/-/versions?keys=[' + pkgnames.join(',') + ']';
 	request(url2, function(error, response, body) {
 	    if (error || response.statusCode != 200) {
-		return handle_error(res);
+		return handle_error(res, error || response.statusCode);
 	    }
 	    var pkgs = JSON.parse(body);
 	    var keys = Object.keys(pkgs);
