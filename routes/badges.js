@@ -3,6 +3,8 @@ var router = express.Router();
 var multiline = require('multiline');
 var request = require('request');
 var handle_error = require('../lib/handle_error');
+var urls = require('../lib/urls');
+var moment = require('moment');
 
 var svg_colors = {
     "brightgreen": "4c1",
@@ -32,10 +34,10 @@ var badge_svg = multiline(function(){/*
   <g fill="#fff" text-anchor="middle"
      font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
     <text x="21.5" y="15" fill="#010101" fill-opacity=".3">
-      CRAN
+      :text:
     </text>
     <text x="21.5" y="14">
-      CRAN
+      :text:
     </text>
     <text x=":textwidth:" y="15" fill="#010101" fill-opacity=".3">
       :message:
@@ -51,24 +53,31 @@ router.get("/", function(req, res) {
     res.render('underconstruction');
 })
 
-var re_pre = '^/version/';
+var re_pre = '^/(version|last-release|ago|version-ago|version-last-release)/';
 var re_pkg = '([\\w\\.]+)';
 var re_suf = '$';
 var re_full = new RegExp(re_pre + re_pkg + re_suf, 'i');
 
 router.get(re_full, function(req, res) {
-    var package = req.params[0];
-    do_query(res, package, req.query);
-});
-
-function do_query(res, package, query) {
+    var type = req.params[0];
+    var package = req.params[1];
 
     var now = new Date().toUTCString();
     res.set('Content-Type', 'image/svg+xml');
     res.set('Expires', now);
     res.set('Cache-Control', 'no-cache');
 
-    var url = 'http://crandb.r-pkg.org/-/desc?keys=["' + package + '"]';
+    if (type == 'version') {
+	return do_version_badge(res, package, req.query);
+    } else {
+	return do_lastrelease_badge(res, package, req.query, type);
+    }
+
+});
+
+function do_version_badge(res, package, query) {
+
+    var url = urls.crandb + '/-/desc?keys=["' + package + '"]';
     request(url, function(error, response, body) {
 	if (error || response.statusCode != 200) {
 	    return handle_error(res, error || response.statusCode);
@@ -78,7 +87,7 @@ function do_query(res, package, query) {
 	if (pbody[package]) {
 	    message = pbody[package]["version"] || "not published";
 	}
-	var svg = make_badge(res, message, query);
+	var svg = make_badge(res, "CRAN", message, query);
 
 	res.set(200);
 	res.send(svg);
@@ -86,7 +95,44 @@ function do_query(res, package, query) {
     });
 }
 
-function make_badge(res, message, query) {
+function do_lastrelease_badge(res, package, query, type) {
+
+    var url = urls.crandb + '/' + package;
+    request(url, function(error, response, body) {
+	if (error) {
+	    return handle_error(res, error || response.statusCode);
+
+	} else if (response.statusCode == 404) {
+	    svg = make_badge(res, 'CRAN', 'not published', query);
+
+	} else {
+	    var json = JSON.parse(body);
+	    var svg;
+	    var d = new Date(json.date);
+	    var now = new Date();
+	    if (d > now) { d = now; }
+	    var ver = json.Version;
+	    var str = d.toISOString().slice(0, 10);
+	    var ago = moment(d).fromNow();
+
+	    if (type == 'last-release') {
+		svg = make_badge(res, 'CRAN', str, query);
+	    } else if (type == 'ago') {
+		svg = make_badge(res, 'CRAN', ago, query);
+	    } else if (type == 'version-ago') {
+		svg = make_badge(res, 'CRAN', ver + ' – ' + ago, query);
+	    } else if (type == 'version-last-release') {
+		svg = make_badge(res, 'CRAN', ver + ' – ' + str, query);
+	    }
+	}
+
+	res.set(200);
+	res.send(svg);
+	res.end();
+    });
+}
+
+function make_badge(res, text, message, query) {
 
     var def_color = "brightgreen";
     if (message == "not published") def_color = "red"
@@ -94,11 +140,12 @@ function make_badge(res, message, query) {
     var no_dots = (message.match(/\./g) || []).length
     var color = query['color'] || def_color;
     color = svg_colors[color] || color;
-    var width = 53 + 7 * len - 3 * no_dots;
-    var textwidth = 47 + 3.5 * len - 1.5 * no_dots;
-    var path_d = 36 + 7 * len - 3 * no_dots;
+    var width = 53 + 6.4 * len - 3 * no_dots;
+    var textwidth = 47 + 3.2 * len - 1.5 * no_dots;
+    var path_d = 36 + 6.4 * len - 3 * no_dots;
 
     svg = badge_svg
+        .replace(/:text:/g, text)
 	.replace(/:color:/g, '#' + color.replace(/[^\w]/g, ''))
 	.replace(/:width:/g, width)
 	.replace(/:textwidth:/g, textwidth)
