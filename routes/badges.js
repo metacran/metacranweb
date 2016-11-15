@@ -135,14 +135,21 @@ function do_lastrelease_badge(res, package, query, type) {
 function make_badge(res, text, message, query) {
 
     var def_color = "brightgreen";
-    if (message == "not published") def_color = "red"
-    var len = message.length;
-    var no_dots = (message.match(/\./g) || []).length
+    if (message == "not published") { def_color = "red" }
     var color = query['color'] || def_color;
     color = svg_colors[color] || color;
-    var width = 53 + 6 * len - 1 * no_dots;
-    var textwidth = 47 + 3 * len - 0.5 * no_dots;
-    var path_d = 36 + 6 * len - 1 * no_dots;
+
+    var len = message.length;
+    var no_dots = (message.match(/\./g) || []).length
+    if (message == "not published") {
+	var width = 53 + 6 * len;
+	var textwidth = 47 + 3 * len;
+	var path_d = 36 + 6 * len;
+    } else {
+	var width = 61 + 6 * len - 3 * no_dots;
+	var textwidth = 51 + 3 * len - 1.5 * no_dots;
+	var path_d = 36 + 6 * len - 1.5 * no_dots;
+    }
 
     svg = badge_svg
         .replace(/:text:/g, text)
