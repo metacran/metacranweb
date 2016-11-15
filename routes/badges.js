@@ -140,9 +140,9 @@ function make_badge(res, text, message, query) {
     var no_dots = (message.match(/\./g) || []).length
     var color = query['color'] || def_color;
     color = svg_colors[color] || color;
-    var width = 53 + 6.4 * len - 3 * no_dots;
-    var textwidth = 47 + 3.2 * len - 1.5 * no_dots;
-    var path_d = 36 + 6.4 * len - 3 * no_dots;
+    var width = 53 + 6 * len - 1 * no_dots;
+    var textwidth = 47 + 3 * len - 0.5 * no_dots;
+    var path_d = 36 + 6 * len - 1 * no_dots;
 
     svg = badge_svg
         .replace(/:text:/g, text)
