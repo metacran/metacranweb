@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var debug = require('debug')('web');
 
 // Routes
 
@@ -61,6 +62,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
+    debug('Development error handler activated, will print stacktraces in error messages.')
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
