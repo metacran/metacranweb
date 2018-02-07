@@ -62,9 +62,10 @@ router.get(re_full, function(req, res) {
     var type = req.params[0];
     var package = req.params[1];
 
-    var now = new Date().toUTCString();
+    var now = new Date();
+    var fivemin = new Date(now.getTime() + 5 * 60000).toUTCString();
     res.set('Content-Type', 'image/svg+xml');
-    res.set('Expires', now);
+    res.set('Expires', fivemin);
     res.set('Cache-Control', 'max-age=300, public');
 
     if (type == 'version') {
