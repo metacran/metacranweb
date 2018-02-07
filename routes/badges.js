@@ -65,7 +65,7 @@ router.get(re_full, function(req, res) {
     var now = new Date().toUTCString();
     res.set('Content-Type', 'image/svg+xml');
     res.set('Expires', now);
-    res.set('Cache-Control', 'no-cache');
+    res.set('Cache-Control', 'max-age=300, public');
 
     if (type == 'version') {
 	return do_version_badge(res, package, req.query);
