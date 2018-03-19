@@ -31,7 +31,7 @@ are welcome.
     `REDIS_HOST` (default: `'127.0.0.1'`) and `REDIS_PORT` (default: `6379`)
 4. Start the app:
 
-    ```Ready check failed: Redis connection gone from end event.
+    ```
     PORT=3000 bin/www
 	  ```
 5. Go to `http://localhost:3000` in your browser.
