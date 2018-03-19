@@ -40,7 +40,7 @@ function do_query(res, package) {
 	    if (err) { return handle_error(res, err) }
 	    results.pkg_link = pkg_link;
 	    results.github_repo = meta.get_gh_repo(results.pkg);
-	    results.pdf_url = "http://cran.rstudio.com/web/packages/";
+	    results.pdf_url = 'http://cran.rstudio.com/web/packages/';
 	    results.pagetitle = results.pkg.Package + ' @ METACRAN';
 		
 		// split authors on commas not inside []
@@ -52,7 +52,7 @@ function do_query(res, package) {
 			id = orcid.extract(author.name_role);
 			if(id.length > 0) {
 				author.orcid = id;
-				author.name_role = author.name_role.replace("(" + id + ")", "");
+				author.name_role = author.name_role.replace(/(\(|\<).*?(\)|\>)\)?\s*/g, '');
 			}
 			return(author);
 		});
