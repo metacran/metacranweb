@@ -9,10 +9,10 @@ a {
 
 .orcid::before {
   background-image: url(/img/orcid.svg);
-  background-size: 14px 14px;
+  background-size: 18px 18px;
   display: inline-block;
   content: "";
   margin: 0 3px 0 3px;
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
 }
