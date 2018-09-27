@@ -109,8 +109,7 @@
 	    <%= pkg.authors_parsed[a].name_role %>
 	      <% if (pkg.authors_parsed[a].orcid) { %>
 	        <a href="https://orcid.org/<%= pkg.authors_parsed[a].orcid %>">
-		  <span class="orcid" aria-hidden="true">
-		    https://orcid.org/<%= pkg.authors_parsed[a].orcid %></span>
+		  <span class="orcid" aria-hidden="true"></span>
 		</a><% } %>
               <% if (a != pkg.authors_parsed.length - 1) { %>,<% } %>
 	   <% } %>
