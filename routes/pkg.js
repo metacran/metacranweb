@@ -42,22 +42,24 @@ function do_query(res, package) {
 	    results.github_repo = meta.get_gh_repo(results.pkg);
 	    results.pdf_url = 'http://cran.rstudio.com/web/packages/';
 	    results.pagetitle = results.pkg.Package + ' @ METACRAN';
-		
-		// split authors on commas not inside []
-		authors_parsed = results.pkg.Author.split(/(?!\B\[[^\]]*),(?![^\[]*\]\B)/g);
-		// extract ORCID iDs
-		authors_parsed = authors_parsed.map((a) => {
-			author = {};
-			author.name_role = a.trim();
-			id = orcid.extract(author.name_role);
-			if(id.length > 0) {
-				author.orcid = id;
-				author.name_role = author.name_role.replace(/(\(|\<).*?(\)|\>)\)?\s*/g, '');
-			}
-			return(author);
+
+	    if (results.pkg.Author) {
+	        // split authors on commas not inside []
+	        authors_parsed = results.pkg.Author.split(/(?!\B\[[^\]]*),(?![^\[]*\]\B)/g);
+	        // extract ORCID iDs
+	        authors_parsed = authors_parsed.map((a) => {
+	            author = {};
+	            author.name_role = a.trim();
+	            id = orcid.extract(author.name_role);
+	            if (id.length > 0) {
+		        author.orcid = id;
+		        author.name_role = author.name_role.replace(/(\(|\<).*?(\)|\>)\)?\s*/g, '');
+		    }
+	            return(author);
 		});
-		results.pkg.authors_parsed = authors_parsed;		
-		res.render('package', results);
+	      results.pkg.authors_parsed = authors_parsed;
+	    }
+	    res.render('package', results);
 	}
     )
 }
