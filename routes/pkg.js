@@ -10,6 +10,7 @@ var async = require('async');
 var handle_error = require('../lib/handle_error');
 var pkg_link = require('../lib/pkg_link');
 var meta = require('metacran-node');
+var orcid = require('identifiers-orcid');
 
 re_full = new RegExp("^/([\\w\\.]+)$", 'i');
 
@@ -39,9 +40,24 @@ function do_query(res, package) {
 	    if (err) { return handle_error(res, err) }
 	    results.pkg_link = pkg_link;
 	    results.github_repo = meta.get_gh_repo(results.pkg);
-	    results.pdf_url = "http://cran.rstudio.com/web/packages/";
+	    results.pdf_url = 'http://cran.rstudio.com/web/packages/';
 	    results.pagetitle = results.pkg.Package + ' @ METACRAN';
-	    res.render('package', results);
+		
+		// split authors on commas not inside []
+		authors_parsed = results.pkg.Author.split(/(?!\B\[[^\]]*),(?![^\[]*\]\B)/g);
+		// extract ORCID iDs
+		authors_parsed = authors_parsed.map((a) => {
+			author = {};
+			author.name_role = a.trim();
+			id = orcid.extract(author.name_role);
+			if(id.length > 0) {
+				author.orcid = id;
+				author.name_role = author.name_role.replace(/(\(|\<).*?(\)|\>)\)?\s*/g, '');
+			}
+			return(author);
+		});
+		results.pkg.authors_parsed = authors_parsed;		
+		res.render('package', results);
 	}
     )
 }

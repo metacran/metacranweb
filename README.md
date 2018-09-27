@@ -18,20 +18,23 @@ are welcome.
    [io.js](https://iojs.org/en/index.html) might work, too, although
    it is currently not tested.
 2. Clone the repo, install needed npm packages:
-   
     ```
     git clone https://github.com/metacran/metacranweb
-	cd metacranweb
-	npm install
-	```
-
-3. Start the app:
+	  cd metacranweb
+	  npm install
+	  ```
+3. Start a local [redis](https://redis.io/) instance, for example with Docker:
+    ```
+    docker run --name metacran-redis -p 6379:6379 redis redis-server
+    ```
+    Alternatively you can configure an exising redis server with the environment variables
+    `REDIS_HOST` (default: `'127.0.0.1'`) and `REDIS_PORT` (default: `6379`)
+4. Start the app:
 
     ```
     PORT=3000 bin/www
-	```
-
-4. Go to `http://localhost:3000` in your browser.
+	  ```
+5. Go to `http://localhost:3000` in your browser.
 
 Tips:
 - Use [supervisor](https://github.com/isaacs/node-supervisor) or
@@ -40,6 +43,10 @@ Tips:
   [personal GitHub access token](https://github.com/settings/tokens/new)
   to avoid the
   [GitHub API rate limits](https://developer.github.com/v3/rate_limit/).
+- Set the `NODE_ENV` environment variable to `development` to get
+  stacktraces in error messages.
+- Set the `DEBUG` environment variable to `web` to get server-side
+  debug messages.
 
 ## Bits and pieces
 

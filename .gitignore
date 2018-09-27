@@ -1,3 +1,5 @@
 /node_modules
 /tags
 /dump.rdb
+
+\.vscode/
