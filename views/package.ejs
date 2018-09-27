@@ -104,15 +104,21 @@
       <hr>
 
       <p><strong>Authors:</strong>
-			<% if (pkg.authors_parsed) { %>
-	  	<% for (a in pkg.authors_parsed) { %>
-			<%= pkg.authors_parsed[a].name_role %><% if (pkg.authors_parsed[a].orcid) { %><a href="https://orcid.org/<%= pkg.authors_parsed[a].orcid %>"><span class="orcid" aria-hidden="true">https://orcid.org/<%= pkg.authors_parsed[a].orcid %></span></a><% } %><% if (a != pkg.authors_parsed.length - 1) { %>,<% } %>
-			<% } %>
-			<% } else { %>
-			<%= pkg.Author %>
-			<% } %>
+	<% if (pkg.authors_parsed) { %>
+	  <% for (a in pkg.authors_parsed) { %>
+	    <%= pkg.authors_parsed[a].name_role %>
+	      <% if (pkg.authors_parsed[a].orcid) { %>
+	        <a href="https://orcid.org/<%= pkg.authors_parsed[a].orcid %>">
+		  <span class="orcid" aria-hidden="true">
+		    https://orcid.org/<%= pkg.authors_parsed[a].orcid %></span>
+		</a><% } %>
+              <% if (a != pkg.authors_parsed.length - 1) { %>,<% } %>
+	   <% } %>
+	<% } else { %>
+	  <%= pkg.Author %>
+	<% } %>
 
-			</p>
+      </p>
       <hr>
 
       <p>
