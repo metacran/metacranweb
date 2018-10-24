@@ -31,7 +31,6 @@ function do_query(req, res, query) {
 			fields: ["Package^10", "Title^5", "Description^2",
 				 "Author^3", "Maintainer^4", "_all" ],
 			query: req.query['q'],
-			operator: "and",
 			"minimum_should_match": "20%"
 		    } },
 		    "functions": [
