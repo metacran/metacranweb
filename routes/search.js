@@ -19,6 +19,9 @@ function do_query(req, res, query) {
 	host: urls['seer']
     });
 
+    var fields = [ "Package^10", "Title^5", "Description^2",
+		   "Author^3", "Maintainer^4", "_all" ];
+
     client.search({
 	index: 'cran-devel',
 	type: 'package',
@@ -27,20 +30,32 @@ function do_query(req, res, query) {
 	"body": {
 	    "query": {
 		"function_score": {
-		    "query": { "multi_match": {
-			fields: ["Package^10", "Title^5", "Description^2",
-				 "Author^3", "Maintainer^4", "_all" ],
-			query: req.query['q'],
-			operator: "and",
-			"minimum_should_match": "20%"
-		    } },
-		    "functions": [
-			{
-			    "script_score": {
-			    "script": "cran_search_score"
-			    }
+		    "query": {
+			"bool": {
+			    "must": [{
+				"multi_match": {
+				    query: req.query['q'],
+				    fields: fields,
+				    type: "most_fields" }
+			    }],
+			    "should": [{
+				"multi_match": {
+				    query: req.query['q'],
+				    fields: fields,
+				    type: "phrase",
+				    boost: 10 }
+			    }, {
+				"multi_match": {
+				    query: req.query['q'],
+				    fields: fields,
+				    operator: "and",
+				    boost: 5 }
+			    }]
 			}
-		    ]
+		    },
+		    "functions": [{
+			"script_score": { "script": "cran_search_score" }
+		    }]
 		}
 	    }
 	}
