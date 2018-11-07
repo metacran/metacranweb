@@ -23,39 +23,53 @@ function do_query(req, res, query) {
 		   "Author^3", "Maintainer^4", "_all" ];
 
     client.search({
-	index: 'cran-devel',
-	type: 'package',
+	index: 'package',
 	from: ((req.query['page'] || 1) - 1) * 10,
 	size: 10,
 	"body": {
 	    "query": {
 		"function_score": {
+		    "functions": [
+			{
+			    "field_value_factor": {
+				"field": "revdeps",
+				"modifier": "sqrt",
+				"factor": 1
+			    }
+			}
+		    ],
 		    "query": {
 			"bool": {
-			    "must": [{
-				"multi_match": {
-				    query: req.query['q'],
-				    fields: fields,
-				    type: "most_fields" }
-			    }],
-			    "should": [{
-				"multi_match": {
-				    query: req.query['q'],
-				    fields: fields,
-				    type: "phrase",
-				    boost: 10 }
-			    }, {
-				"multi_match": {
-				    query: req.query['q'],
-				    fields: fields,
-				    operator: "and",
-				    boost: 5 }
-			    }]
+			    "must": [
+				{
+				    "multi_match": {
+					"query": req.query['q'],
+					"type": "most_fields"
+				    }
+				}
+			    ],
+			    "should": [
+				{
+				    "multi_match": {
+					"query": req.query['q'],
+					"fields": ["Title^10", "Description^2", "_all"],
+					"type": "phrase",
+					"analyzer": "english_and_synonyms",
+					"boost": 10
+				    }
+				},
+				{
+				    "multi_match": {
+					"query": req.query['q'],
+					"fields": ["Package^20", "Title^10", "Description^2", "Author^5", "Maintainer^6", "_all"],
+					"operator": "and",
+					"analyzer": "english_and_synonyms",
+					"boost": 5
+				    }
+				}
+			    ]
 			}
-		    },
-		    "functions": [{
-			"script_score": { "script": "cran_search_score" }
-		    }]
+		    }
 		}
 	    }
 	}
