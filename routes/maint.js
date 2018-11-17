@@ -52,6 +52,7 @@ re_full = new RegExp("^/(.+)$");
 router.get(re_full, function(req, res) {
 
     var maint = req.params[0];
+    console.log("Querying maintainer: " + maint)
 
     async.parallel(
 	{
