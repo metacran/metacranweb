@@ -2,7 +2,7 @@
   <% for (var i = 0; i < 3; i++) { %>
      <div class="row">
        <% for (var j = 0; j < 3; j++) { %>
-	  <% var mypkg = pkgs[ptr]; ptr++; %>
+	  <% var mypkg = pkgs[ptr]; ptr++; if (mypkg === undefined) { continue; } %>
 	  <div class="col-sm-4">
 	    <a href="/pkg/<%= mypkg.Package %>"><h2><%= mypkg.Package %></h2></a>
 	    <h4><%= mypkg.Title %></h4>
