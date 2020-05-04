@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var multiline = require('multiline');
 var request = require('request');
-var handle_error = require('../lib/handle_error');
 var urls = require('../lib/urls');
 var moment = require('moment');
 
@@ -58,7 +57,7 @@ var re_pkg = '([\\w\\.]+)';
 var re_suf = '$';
 var re_full = new RegExp(re_pre + re_pkg + re_suf, 'i');
 
-router.get(re_full, function(req, res) {
+router.get(re_full, function(req, res, next) {
     var type = req.params[0];
     var package = req.params[1];
 
@@ -69,67 +68,76 @@ router.get(re_full, function(req, res) {
     res.set('Cache-Control', 'max-age=300, public');
 
     if (type == 'version') {
-	return do_version_badge(res, package, req.query);
+	return do_version_badge(res, next, package, req.query);
     } else {
-	return do_lastrelease_badge(res, package, req.query, type);
+	return do_lastrelease_badge(res, next, package, req.query, type);
     }
 
 });
 
-function do_version_badge(res, package, query) {
+function do_version_badge(res, next, package, query) {
 
     var url = urls.crandb + '/-/desc?keys=["' + package + '"]';
     request(url, function(error, response, body) {
 	if (error || response.statusCode != 200) {
-	    return handle_error(res, error || response.statusCode);
+	    return next(error || response.statusCode);
 	}
-	var pbody = JSON.parse(body);
-	var message = "not published";
-	if (pbody[package]) {
-	    message = pbody[package]["version"] || "not published";
-	}
-	var svg = make_badge(res, "CRAN", message, query);
+        try {
+	    var pbody = JSON.parse(body);
+	    var message = "not published";
+	    if (pbody[package]) {
+	        message = pbody[package]["version"] || "not published";
+	    }
+	    var svg = make_badge(res, "CRAN", message, query);
 
-	res.set(200);
-	res.send(svg);
-	res.end();
+	    res.set(200);
+	    res.send(svg);
+	    res.end();
+        } catch(err) {
+            return next(err);
+        }
     });
 }
 
-function do_lastrelease_badge(res, package, query, type) {
+function do_lastrelease_badge(res, next, package, query, type) {
 
     var url = urls.crandb + '/' + package;
     request(url, function(error, response, body) {
 	if (error) {
-	    return handle_error(res, error || response.statusCode);
+	    return next(error || response.statusCode);
+        }
 
-	} else if (response.statusCode == 404) {
-	    svg = make_badge(res, 'CRAN', 'not published', query);
+        try {
+	    if (response.statusCode == 404) {
+	        svg = make_badge(res, 'CRAN', 'not published', query);
 
-	} else {
-	    var json = JSON.parse(body);
-	    var svg;
-	    var d = new Date(json.date);
-	    var now = new Date();
-	    if (d > now) { d = now; }
-	    var ver = json.Version;
-	    var str = d.toISOString().slice(0, 10);
-	    var ago = moment(d).fromNow();
+	    } else {
+	        var json = JSON.parse(body);
+	        var svg;
+	        var d = new Date(json.date);
+	        var now = new Date();
+	        if (d > now) { d = now; }
+	        var ver = json.Version;
+	        var str = d.toISOString().slice(0, 10);
+	        var ago = moment(d).fromNow();
 
-	    if (type == 'last-release') {
-		svg = make_badge(res, 'CRAN', str, query);
-	    } else if (type == 'ago') {
-		svg = make_badge(res, 'CRAN', ago, query);
-	    } else if (type == 'version-ago') {
-		svg = make_badge(res, 'CRAN', ver + ' – ' + ago, query);
-	    } else if (type == 'version-last-release') {
-		svg = make_badge(res, 'CRAN', ver + ' – ' + str, query);
-	    }
-	}
+	        if (type == 'last-release') {
+		    svg = make_badge(res, 'CRAN', str, query);
+	        } else if (type == 'ago') {
+		    svg = make_badge(res, 'CRAN', ago, query);
+	        } else if (type == 'version-ago') {
+		    svg = make_badge(res, 'CRAN', ver + ' – ' + ago, query);
+	        } else if (type == 'version-last-release') {
+		    svg = make_badge(res, 'CRAN', ver + ' – ' + str, query);
+	        }
+            }
 
-	res.set(200);
-	res.send(svg);
-	res.end();
+	    res.set(200);
+	    res.send(svg);
+	    res.end();
+        } catch(err) {
+            return next(err);
+        }
     });
 }
 

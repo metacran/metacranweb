@@ -4,16 +4,16 @@ var elasticsearch = require('elasticsearch');
 var urls = require('../lib/urls');
 var clean_package = require('../lib/clean_package');
 
-router.get("/search.html", function(req, res) {
+router.get("/search.html", function(req, res, next) {
     req.query.page = + req.query.page || 1;
     if (!!req.query['q']) {
-	do_query(req, res);
+	do_query(req, res, next);
     } else {
-	show_empty(res);
+	show_empty(res, next);
     }
 })
 
-function do_query(req, res, query) {
+function do_query(req, res, next) {
     
     var client = new elasticsearch.Client({
 	host: urls['seer']
@@ -75,9 +75,12 @@ function do_query(req, res, query) {
 	}
     }).then(function(resp) {
 	show_results(resp, req, res);
-    }, function(err) {
+    }).catch(function(err) {
+        next(err);
     });
 }
+
+// Errors here will be caught by the promise, and forwarded to next()
 
 function show_results(resp, req, res) {
 
@@ -99,7 +102,7 @@ function show_results(resp, req, res) {
 			 });
 }
 
-function show_empty(res) {
+function show_empty(res, next) {
     res.redirect('/');
 }
 

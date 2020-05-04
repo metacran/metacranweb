@@ -10,9 +10,8 @@ var num_maint = require('../lib/num_maint');
 var num_downloads = require('../lib/num_downloads');
 var num_updates = require('../lib/num_updates');
 var async = require('async');
-var handle_error = require('../lib/handle_error');
 
-router.get('/', function(req, res) {
+router.get('/', function(req, res, next) {
 
     async.parallel(
 	{ 'numactive': function(cb) {
@@ -35,8 +34,12 @@ router.get('/', function(req, res) {
 	    top_revdeps(function(e, r) { cb(e, r) }) }
 	},
 	function(err, results) {
-	    if (err) { return handle_error(res, err); }
-	    res.render('index', results);
+	    if (err) { return next(err); }
+	    try {
+                res.render('index', results);
+            } catch {
+                next(new Error("Cannot render index :("));
+            }
 	}
     )
 });
