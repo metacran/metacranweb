@@ -92,7 +92,6 @@ function do_version_badge(res, next, package, query) {
 
 	    res.set(200);
 	    res.send(svg);
-	    res.end();
         } catch(err) {
             return next(err);
         }
@@ -134,7 +133,6 @@ function do_lastrelease_badge(res, next, package, query, type) {
 
 	    res.set(200);
 	    res.send(svg);
-	    res.end();
         } catch(err) {
             return next(err);
         }
