@@ -37,8 +37,8 @@ router.get('/', function(req, res, next) {
 	    if (err) { return next(err); }
 	    try {
                 res.render('index', results);
-            } catch {
-                next(new Error("Cannot render index :("));
+            } catch(err) {
+                return next(err);
             }
 	}
     )
