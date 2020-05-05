@@ -69,6 +69,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
     debug('Development error handler activated, will print stacktraces in error messages.')
     app.use(function(err, req, res, next) {
+        res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
         console.log(err)
         res.status(err.status || 500);
         res.render('error', {
@@ -81,6 +82,7 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
