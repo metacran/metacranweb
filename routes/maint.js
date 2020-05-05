@@ -59,7 +59,6 @@ re_full = new RegExp("^/(.+)$");
 router.get(re_full, function(req, res, next) {
 
     var maint = req.params[0];
-    console.log("Querying maintainer: " + maint)
 
     async.parallel(
 	{
@@ -72,7 +71,11 @@ router.get(re_full, function(req, res, next) {
 	},
 	function(err, results) {
 
-	    if (err) { return next(err); }
+            if (err || results.pkgs === undefined) {
+                var err = new Error('Not Found');
+                err.status = 404;
+                return next(err);
+            }
             try {
 	        results.email = maint;
 	        results.title = 'Packages by ' +
