@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
     var startkey = req.query.startkey || '';
     var url = urls.crandb +
 	'/-/maintainernames?group_level=2&limit=100&startkey=["' +
-	startkey + '"]';
+	encodeURI(startkey) + '"]';
     request(url, function(error, response, body) {
 	if (error || response.statusCode != 200) {
 	    return next(error || response.statusCode);
