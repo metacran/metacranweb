@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var top_starred = require('../lib/top_starred');
 var top_downloaded = require('../lib/top_downloaded');
 var top_revdeps = require('../lib/top_revdeps');
 var trending = require('../lib/trending');
@@ -22,8 +21,6 @@ router.get('/', function(req, res, next) {
 	    num_updates(function(e, r) { cb(e, r) }) },
 	  'numdownloads': function(cb) {
 	    num_downloads(function(e, r) { cb(e, r) }) },
-	  'stars': function(cb) {
-	    top_starred(function(e, r) { cb(e, r) }) },
 	  'downloads': function(cb) {
 	    top_downloaded(function(e, r) { cb(e, r) }) },
 	  'trending': function(cb) {

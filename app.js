@@ -13,13 +13,11 @@ var badges = require('./routes/badges');
 var search = require('./routes/search');
 var pkg = require('./routes/pkg');
 var pkglist = require('./routes/pkglist');
-var starlist = require('./routes/starlist');
 var trendinglist = require('./routes/trendinglist');
 var downloadlist = require('./routes/downloadlist');
 var mostrecent = require('./routes/mostrecent');
 var depended = require('./routes/depended');
 var maint = require('./routes/maint');
-var task_views = require('./routes/task_views');
 var dokkucheck = require('./routes/check');
 
 var app = express();
@@ -41,7 +39,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/starred', starlist);
 app.use('/recent', mostrecent);
 app.use('/trending', trendinglist);
 app.use('/downloaded', downloadlist);
@@ -52,7 +49,6 @@ app.use('/pkg', pkg);
 app.use('/maint', maint);
 app.use('/', search);
 app.use('/', routes);
-app.use('/ctv', task_views);
 app.use('/check', dokkucheck);
 
 // catch 404 and forward to error handler

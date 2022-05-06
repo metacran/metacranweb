@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 var get_package = require('../lib/get_package');
 var get_revdeps = require('../lib/get_revdeps');
-var get_readme = require('../lib/get_readme');
-var get_news = require('../lib/get_news');
 var async = require('async');
 var pkg_link = require('../lib/pkg_link');
 var meta = require('metacran-node');
@@ -23,13 +21,7 @@ function do_query(res, next, package) {
 	    'pkg': function(cb) {
 		get_package(package, function(e, r) { cb(e, r)}) },
 	    'revdeps': function(cb) {
-		get_revdeps(package, function(e, r) { cb(e, r)}) },
-	    'readme': function(cb) {
-		get_readme(package, function(e, r) { cb(e, r)}) },
-	    'news': function(cb) {
-		get_news(package, function(e, r) { cb(e, r)}) },
-	    'taskviews': function(cb) {
-		get_pkg_tvs(package, function(e, r) { cb(e, r)}) }
+		get_revdeps(package, function(e, r) { cb(e, r)}) }
 	},
 	function(err, results) {
 	    if (err) { return next(err) }

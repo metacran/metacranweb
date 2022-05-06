@@ -10,26 +10,11 @@
       <div class="page-header">
 	<div class="btn-toolbar pull-right pkg-icons">
 	  <div class="btn-group" role="tab-list">
-	    <% if (stars) { %>
-	    <a href="https://github.com/<%= github_repo %>"
-	       class="btn btn-default" title="View on GitHub">
-	      <i class="fa fa-star fa-lg"></i>&nbsp; <%= stars %>
-	    </a>
-	    <% } %>
-	  </div>
-	  <div class="btn-group" role="tab-list">
 	    <a href="#README" aria-control="README" role="tab"
 	       data-toggle="tab" class="btn btn-default"
 	       title="Package page">
 	      <i class="fa fa-lg fa-home"></i>
 	    </a>
-	    <% if (news) { %>
-	      <a href="#NEWS" aria-control="NEWS" role="tab"
-		 data-toggle="tab" class="btn btn-default"
-		 title="News">
-		<i class="fa fa-lg fa-newspaper-o"></i>
-	      </a>
-	    <% } %>
 	    <a href="#Manual" aria-control="Manual" role="tab"
 	       data-toggle="tab" class="btn btn-default"
 	       title="Reference manual">
@@ -41,25 +26,6 @@
       </div>
 
       <div class="tab-content">
-	<div role="tabpanel" class="tab-pane fade in active" id="README">
-
-	  <div>
-	    <h1><%= pkg.Title %></h1>
-	    <p class="lead"><%- pkg.Description %></p>
-	    <hr>
-	  </div>
-	  <div id="readme">
-	    <% if (readme) { %>
-	    <%- readme %>
-	    <% } %>
-	  </div>
-	</div>
-
-	<div role="tabpanel" class="tab-pane fade in" id="NEWS">
-	  <h1>News</h1>
-	  <%- news %>
-	</div>
-
 	<div role="tabpanel" class="tab-pane fade in" id="Manual">
 	  <h1>Reference manual</h1>
 	  <object
@@ -128,17 +94,6 @@
 	</a><br>
       </p>
       <hr>
-
-      <% if (taskviews) { %>
-        <p>
-	  <strong>Task views:</strong>
-	  <% for (i in taskviews) { var tv = taskviews[i].split(':'); %>
-	    <a href="/ctv/<%= tv[0].trim() %>">
-	    <%= tv[1].trim() %></a><% if (i != taskviews.length - 1) { %>,<% } %>
-	  <% } %>
-	</p>
-	<hr>
-      <% } %>
 
       <% if (pkg.License) { %><p><strong><%= pkg.License %></strong>
 	license</p><hr><% } %>
