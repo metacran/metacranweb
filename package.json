@@ -22,7 +22,7 @@
     "gravatar": "~1.1.1",
     "hiredis": "^0.4.0",
     "identifiers-orcid": "^0.1.1",
-    "metacran-node": "git://github.com/metacran/metacran-node.git",
+    "metacran-node": "https://github.com/metacran/metacran-node.git",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
     "multiline": "~1.0.2",
