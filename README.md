@@ -27,7 +27,7 @@ are welcome.
     ```
     docker run --name metacran-redis -p 6379:6379 redis redis-server
     ```
-    Alternatively you can configure an exising redis server with the environment variables
+    Alternatively you can configure an existing redis server with the environment variables
     `REDIS_HOST` (default: `'127.0.0.1'`) and `REDIS_PORT` (default: `6379`)
 4. Start the app:
 
@@ -67,7 +67,7 @@ We connect to various database backends, via HTTP(S):
   data from the RStudio mirror. A PostgreSQL database with a HTTP API.
 - [seer](https://github.com/metacran/seer) An elasticsearch database of
   CRAN package metadata.
-- [docs](http://docs.r-pkg.org:5984/) A  CouchDB database of various
+- [docs](http://docs.r-pkg.org:5984/) A CouchDB database of various
   CRAN package documentation: READMEs, NEWS files, CRAN Task Views, etc.
   This does not have a public API.
 
