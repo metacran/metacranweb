@@ -14,39 +14,12 @@ are welcome.
 
 ## Run it locally
 
-1. Install [node.js](https://nodejs.org/).
-   [io.js](https://iojs.org/en/index.html) might work, too, although
-   it is currently not tested.
-2. Clone the repo, install needed npm packages:
-    ```
-    git clone https://github.com/metacran/metacranweb
-	  cd metacranweb
-	  npm install
-	  ```
-3. Start a local [redis](https://redis.io/) instance, for example with Docker:
-    ```
-    docker run --name metacran-redis -p 6379:6379 redis redis-server
-    ```
-    Alternatively you can configure an exising redis server with the environment variables
-    `REDIS_HOST` (default: `'127.0.0.1'`) and `REDIS_PORT` (default: `6379`)
-4. Start the app:
-
-    ```
-    PORT=3000 bin/www
-	  ```
-5. Go to `http://localhost:3000` in your browser.
-
-Tips:
-- Use [supervisor](https://github.com/isaacs/node-supervisor) or
-  a similar program to watch for changes.
-- Set the `GH_TOKEN` environment variable to your
-  [personal GitHub access token](https://github.com/settings/tokens/new)
-  to avoid the
-  [GitHub API rate limits](https://developer.github.com/v3/rate_limit/).
-- Set the `NODE_ENV` environment variable to `development` to get
-  stacktraces in error messages.
-- Set the `DEBUG` environment variable to `web` to get server-side
-  debug messages.
+Install docker and run:
+```
+docker compose build
+docker compose up
+```
+then go to `http://localhost:3000` in your browser.
 
 ## Bits and pieces
 
@@ -65,12 +38,7 @@ We connect to various database backends, via HTTP(S):
   CRAN package metadata.
 - [cranlogs](https://github.com/metacran/cranlogs.app) CRAN download
   data from the RStudio mirror. A PostgreSQL database with a HTTP API.
-- [seer](https://github.com/metacran/seer) An elasticsearch database of
-  CRAN package metadata.
-- [docs](http://docs.r-pkg.org:5984/) A  CouchDB database of various
-  CRAN package documentation: READMEs, NEWS files, CRAN Task Views, etc.
-  This does not have a public API.
 
 ## License
 
-MIT © 2015 Gabor Csardi and contributors
+MIT © 2015-2024 Gabor Csardi and contributors
