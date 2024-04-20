@@ -28,7 +28,7 @@ function do_query(res, next, package) {
             try {
 	        results.pkg_link = pkg_link;
 	        results.github_repo = meta.get_gh_repo(results.pkg);
-	        results.pdf_url = 'http://cran.rstudio.com/web/packages/';
+	        results.pdf_url = 'https://cran.rstudio.com/web/packages/';
 	        results.pagetitle = results.pkg.Package + ' @ METACRAN';
 
 	        if (results.pkg.Author) {
