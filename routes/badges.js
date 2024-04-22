@@ -1,9 +1,8 @@
-var express = require('express');
+import express from 'express';
 var router = express.Router();
-var multiline = require('multiline');
-var request = require('request');
-var urls = require('../lib/urls');
-var moment = require('moment');
+import ky from 'ky';
+import urls from '../lib/urls.js';
+import moment from 'moment';
 
 var svg_colors = {
     "brightgreen": "4c1",
@@ -16,7 +15,7 @@ var svg_colors = {
     "blue": "007ec6"
 };
 
-var badge_svg = multiline(function(){/*
+var badge_svg = `/*
 <svg xmlns="https://www.w3.org/2000/svg" width=":width:" height="20" aria-label=":text: :message:">
   <linearGradient id="b" x2="0" y2="100%">
     <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
@@ -45,8 +44,7 @@ var badge_svg = multiline(function(){/*
       :message:
     </text>
   </g>
-</svg>
-*/});
+</svg>`
 
 router.get("/", function(req, res) {
     res.render('underconstruction');
@@ -59,7 +57,7 @@ var re_full = new RegExp(re_pre + re_pkg + re_suf, 'i');
 
 router.get(re_full, function(req, res, next) {
     var type = req.params[0];
-    var package = req.params[1];
+    var pkg = req.params[1];
 
     var now = new Date();
     var fivemin = new Date(now.getTime() + 5 * 60000).toUTCString();
@@ -68,16 +66,16 @@ router.get(re_full, function(req, res, next) {
     res.set('Cache-Control', 'max-age=300, public');
 
     if (type == 'version') {
-	return do_version_badge(res, next, package, req.query);
+	return do_version_badge(res, next, pkg, req.query);
     } else {
-	return do_lastrelease_badge(res, next, package, req.query, type);
+	return do_lastrelease_badge(res, next, pkg, req.query, type);
     }
 
 });
 
-function do_version_badge(res, next, package, query) {
+function do_version_badge(res, next, pkg, query) {
 
-    var url = urls.crandb + '/-/desc?keys=["' + package + '"]';
+    var url = urls.crandb + '/-/desc?keys=["' + pkg + '"]';
     request(url, function(error, response, body) {
 	if (error || response.statusCode != 200) {
 	    return next(error || response.statusCode);
@@ -85,8 +83,8 @@ function do_version_badge(res, next, package, query) {
         try {
 	    var pbody = JSON.parse(body);
 	    var message = "not published";
-	    if (pbody[package]) {
-	        message = pbody[package]["version"] || "not published";
+	    if (pbody[pkg]) {
+	        message = pbody[pkg]["version"] || "not published";
 	    }
 	    var svg = make_badge(res, "CRAN", message, query);
 
@@ -98,9 +96,9 @@ function do_version_badge(res, next, package, query) {
     });
 }
 
-function do_lastrelease_badge(res, next, package, query, type) {
+function do_lastrelease_badge(res, next, pkg, query, type) {
 
-    var url = urls.crandb + '/' + package;
+    var url = urls.crandb + '/' + pkg;
     request(url, function(error, response, body) {
 	if (error) {
 	    return next(error || response.statusCode);
@@ -169,4 +167,4 @@ function make_badge(res, text, message, query) {
     return svg;
 }
 
-module.exports = router;
+export default router;

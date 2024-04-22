@@ -1,24 +1,25 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var debug = require('debug')('web');
+import express from 'express';
+import path from 'path';
+import logger from 'morgan';
+import cookieParser from 'cookie-parser';
+
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Routes
 
-var routes = require('./routes/index');
-var badges = require('./routes/badges');
-var search = require('./routes/search');
-var pkg = require('./routes/pkg');
-var pkglist = require('./routes/pkglist');
-var trendinglist = require('./routes/trendinglist');
-var downloadlist = require('./routes/downloadlist');
-var mostrecent = require('./routes/mostrecent');
-var depended = require('./routes/depended');
-var maint = require('./routes/maint');
-var dokkucheck = require('./routes/check');
+import routes from './routes/index.js';
+import badges from './routes/badges.js';
+import search from './routes/search.js';
+import pkg from './routes/pkg.js';
+import pkglist from './routes/pkglist.js';
+import trendinglist from './routes/trendinglist.js';
+import downloadlist from './routes/downloadlist.js';
+import mostrecent from './routes/mostrecent.js';
+import depended from './routes/depended.js';
+import maint from './routes/maint.js';
+import dokkucheck from './routes/check.js';
 
 var app = express();
 
@@ -34,8 +35,8 @@ app.get('/robots.txt', function (req, res) {
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -63,7 +64,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    debug('Development error handler activated, will print stacktraces in error messages.')
+    console.log('Development error handler activated, will print stacktraces in error messages.')
     app.use(function(err, req, res, next) {
         res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
         console.log(err)
@@ -86,5 +87,4 @@ app.use(function(err, req, res, next) {
     });
 });
 
-
-module.exports = app;
+export default app;

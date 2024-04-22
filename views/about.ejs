@@ -1,5 +1,5 @@
-<% include header %>
-<% include nav %>
+<%- include ('header') %>
+<%- include ('nav') %>
 
 <div class="container about-page">
   <div class="row">
@@ -33,7 +33,7 @@
 	METACRAN is not a separate R package repository. It contains
 	exactly the same packages as CRAN itself.
       </p>
-	
+
       <h3>Contribute</h3>
       <p>
 	Yes, please! METACRAN is developed completely
@@ -59,9 +59,9 @@
 	Are all welcome! Send pull requests or just open issues please.
       </p>
 
-    </div>    
+    </div>
   </div>
 </div>
 
-<% include links %>
-<% include footer %>
+<%- include ('links') %>
+<%- include ('footer') %>

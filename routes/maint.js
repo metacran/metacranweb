@@ -1,13 +1,12 @@
-var express = require('express');
+import express from 'express';
 var router = express.Router();
-var request = require('request');
-var async = require('async');
-var get_maint = require('../lib/get_maint');
-var urls = require('../lib/urls');
-var pkg_link = require('../lib/pkg_link');
-var get_packages_by = require('../lib/get_packages_by');
-var get_photo_url = require('../lib/get_photo_url');
-var get_gh_username = require('../lib/get_gh_username');
+import ky from 'ky';
+import async from 'async';
+import urls from '../lib/urls.js';
+import pkg_link from '../lib/pkg_link.js';
+import get_packages_by from '../lib/get_packages_by.js';
+import get_photo_url from '../lib/get_photo_url.js';
+import get_gh_username from '../lib/get_gh_username.js';
 
 router.get('/', function(req, res, next) {
     var startkey = req.query.startkey || '';
@@ -35,10 +34,10 @@ router.get('/', function(req, res, next) {
 	            var packages = {};
 	            JSON.parse(body).map(function(x) {
 		        var email = x[0];
-		        var package = x[1];
+		        var pkg = x[1];
 		        if (!packages[email]) { packages[email] = []; }
-		        if (packages[email].indexOf(package) < 0) {
-		            packages[email].push(package);
+		        if (packages[email].indexOf(pkg) < 0) {
+		            packages[email].push(pkg);
 		        }
 	            })
 	            res.render('maint', { 'people': pp,
@@ -55,7 +54,7 @@ router.get('/', function(req, res, next) {
     });
 })
 
-re_full = new RegExp("^/(.+)$");
+const re_full = new RegExp("^/(.+)$");
 router.get(re_full, function(req, res, next) {
 
     var maint = req.params[0];
@@ -94,4 +93,4 @@ router.get(re_full, function(req, res, next) {
     )
 })
 
-module.exports = router;
+export default router;

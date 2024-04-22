@@ -6,7 +6,8 @@ services:
       context: .
     ports:
       - "3000:80"
+    command: nodemon bin/www.js
+    volumes:
+      - .:/src
     environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
       - REDIS_URL=redis://redis:6379

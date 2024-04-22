@@ -1,9 +1,9 @@
-var express = require('express');
+import express from 'express';
 var router = express.Router();
-var request = require('request');
-var cache = require('../lib/cache');
-var urls = require('../lib/urls');
-var clean_package = require('../lib/clean_package');
+import ky from 'ky';
+import cache from '../lib/cache.js';
+import urls from '../lib/urls.js';
+import clean_package from '../lib/clean_package.js';
 
 router.get('/', function(req, res, next) {
 
@@ -67,4 +67,4 @@ router.get('/', function(req, res, next) {
     );
 })
 
-module.exports = router;
+export default router;

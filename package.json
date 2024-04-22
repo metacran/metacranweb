@@ -1,9 +1,11 @@
 {
   "name": "metacranweb",
+  "type": "module",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www.js",
+    "test": "c8 mocha"
   },
   "engines": {
     "node": "20.x"
@@ -11,6 +13,7 @@
   "dependencies": {
     "async": "^3.2.5",
     "comma-numbers": "^0.0.2",
+    "cookie-parser": "^1.4.6",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "gh-user": "^6.0.0",
@@ -21,5 +24,10 @@
     "moment": "^2.30.1",
     "morgan": "^1.10.0",
     "redis": "^4.6.5"
+  },
+  "devDependencies": {
+    "c8": "^9.1.0",
+    "mocha": "^10.4.0",
+    "testdouble": "^3.20.2"
   }
 }

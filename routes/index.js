@@ -1,52 +1,47 @@
-var express = require('express');
+import express from 'express';
 var router = express.Router();
-var top_downloaded = require('../lib/top_downloaded');
-var top_revdeps = require('../lib/top_revdeps');
-var trending = require('../lib/trending');
-var recent = require('../lib/recent');
-var num_active = require('../lib/num_active');
-var num_maint = require('../lib/num_maint');
-var num_downloads = require('../lib/num_downloads');
-var num_updates = require('../lib/num_updates');
-var async = require('async');
+import top_downloaded from '../lib/top_downloaded.js';
+import top_revdeps from '../lib/top_revdeps.js';
+import trending from '../lib/trending.js';
+import recent from '../lib/recent.js';
+import num_active from '../lib/num_active.js';
+import num_maint from '../lib/num_maint.js';
+import num_downloads from '../lib/num_downloads.js';
+import num_updates from '../lib/num_updates.js';
 
-router.get('/', function(req, res, next) {
-
-    async.parallel(
-	{ 'numactive': function(cb) {
-	    num_active(function(e, r) { cb(e, r) }) },
-	  'nummaint': function(cb) {
-	    num_maint(function(e, r) { cb(e, r) }) },
-	  'numupdates': function(cb) {
-	    num_updates(function(e, r) { cb(e, r) }) },
-	  'numdownloads': function(cb) {
-	    num_downloads(function(e, r) { cb(e, r) }) },
-	  'downloads': function(cb) {
-	    top_downloaded(function(e, r) { cb(e, r) }) },
-	  'trending': function(cb) {
-	    trending(function(e, r) { cb(e, r) }) },
-	  'recent': function(cb) {
-	    recent(function(e, r) { cb(e, r) }) },
-	  'toprevdeps': function(cb) {
-	    top_revdeps(function(e, r) { cb(e, r) }) }
-	},
-	function(err, results) {
-	    if (err) { return next(err); }
-	    try {
-                res.render('index', results);
-            } catch(err) {
-                return next(err);
-            }
+router.get('/', async function (req, res, next) {
+	try {
+		const na = num_active();
+		const nm = num_maint();
+		const nu = num_updates();
+		const nd = num_downloads();
+		const td = top_downloaded();
+		const tr = trending();
+		const re = recent();
+		const rv = top_revdeps();
+		const all = await Promise.all([na, nm, nu, nd, td, tr, re, rv]);
+		const results = {
+			numactive:    all[0],
+			nummaint:     all[1],
+			numupdates:   all[2],
+			numdownloads: all[3],
+			downloads:    all[4],
+			trending:     all[5],
+			recent:       all[6],
+			toprevdeps:   all[7]
+		};
+		res.render('index', results);
+	} catch (err) {
+		next(err);
 	}
-    )
 });
 
-router.get('/about', function(req, res) {
-    res.render('about', { 'pagetitle': 'About METACRAN' });
+router.get('/about', function (req, res) {
+	res.render('about', { 'pagetitle': 'About METACRAN' });
 })
 
-router.get('/services', function(req, res) {
-    res.render('services', { 'pagetitle': 'METACRAN services' });
-})    
+router.get('/services', function (req, res) {
+	res.render('services', { 'pagetitle': 'METACRAN services' });
+})
 
-module.exports = router;
+export default router;

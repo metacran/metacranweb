@@ -1,27 +1,27 @@
-var express = require('express');
+import express from 'express';
 var router = express.Router();
-var get_package = require('../lib/get_package');
-var get_revdeps = require('../lib/get_revdeps');
-var async = require('async');
-var pkg_link = require('../lib/pkg_link');
-var meta = require('metacran-node');
-var orcid = require('identifiers-orcid');
+import get_package from '../lib/get_package.js';
+import get_revdeps from '../lib/get_revdeps.js';
+import async from 'async';
+import pkg_link from '../lib/pkg_link.js';
+import meta from '../lib/meta.js';
+import orcid from 'identifiers-orcid';
 
-re_full = new RegExp("^/([\\w\\.]+)$", 'i');
+const re_full = new RegExp("^/([\\w\\.]+)$", 'i');
 
 router.get(re_full, function(req, res, next) {
-    var package = req.params[0];
-    do_query(res, next, package);
+    var pkg = req.params[0];
+    do_query(res, next, pkg);
 })
 
-function do_query(res, next, package) {
+function do_query(res, next, pkg) {
 
     async.parallel(
 	{
 	    'pkg': function(cb) {
-		get_package(package, function(e, r) { cb(e, r)}) },
+		get_package(pkg, function(e, r) { cb(e, r)}) },
 	    'revdeps': function(cb) {
-		get_revdeps(package, function(e, r) { cb(e, r)}) }
+		get_revdeps(pkg, function(e, r) { cb(e, r)}) }
 	},
 	function(err, results) {
 	    if (err) { return next(err) }
@@ -55,4 +55,4 @@ function do_query(res, next, package) {
     )
 }
 
-module.exports = router;
+export default router;

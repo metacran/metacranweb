@@ -1,8 +1,8 @@
-var express = require('express');
-var request = require('request');
+import express from 'express';
+import ky from 'ky';
 var router = express.Router();
-var urls = require('../lib/urls');
-var clean_package = require('../lib/clean_package');
+import urls from '../lib/urls.js';
+import clean_package from '../lib/clean_package.js';
 
 router.get("/search.html", function (req, res, next) {
 	req.query.page = + req.query.page || 1;
@@ -105,4 +105,4 @@ function show_empty(res, next) {
 	res.redirect('/');
 }
 
-module.exports = router;
+export default router;
