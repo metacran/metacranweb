@@ -3,15 +3,17 @@ import mocha from 'mocha'
 
 import * as td from 'testdouble'
 
-mocha.describe('num_downloads cache hit', function () {
+mocha.describe('recent cache hit', function () {
   mocha.beforeEach(async function () {
     await td.replaceEsm(
       '../lib/cache.js',
       undefined,
       async function (_key, cleanup, _refresh) {
-        return cleanup('[{ "downloads": 12345 }]');
+        return cleanup(JSON.stringify(
+          [ { Package: "foo" }, { Package: "bar" } ]
+        ));
       })
-    this.subject = await import('../lib/num_downloads.js');
+    this.subject = await import('../lib/recent.js');
   })
 
   mocha.afterEach(function () {
@@ -20,11 +22,12 @@ mocha.describe('num_downloads cache hit', function () {
 
   mocha.it('cache hit', async function () {
     const na = await this.subject.default();
-    assert.equal(na, '12,345');
+    assert.equal(na[0].Package, 'foo');
+    assert.equal(na[1].Package, 'bar');
   });
 });
 
-mocha.describe('num_downloads cache miss + refresh', function () {
+mocha.describe('recent cache miss + refresh', function () {
   if (process.env.METACRAN_LIVE_TESTS != 'true') {
     return;
   }
@@ -36,7 +39,7 @@ mocha.describe('num_downloads cache miss + refresh', function () {
         const val = await refresh(key);
         return cleanup(val);
       })
-    this.subject = await import('../lib/num_downloads.js');
+    this.subject = await import('../lib/recent.js');
   })
 
   mocha.afterEach(function () {
@@ -45,6 +48,6 @@ mocha.describe('num_downloads cache miss + refresh', function () {
 
   mocha.it('cache miss', async function () {
     const na = await this.subject.default();
-    assert.match(na, /^[0-9]+,[0-9]+,?[0-9]*$/);
+    assert.ok(na[0].Package);
   });
 });

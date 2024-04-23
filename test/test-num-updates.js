@@ -9,7 +9,7 @@ mocha.describe('num_updates cache hit', function () {
       '../lib/cache.js',
       undefined,
       async function (_key, cleanup, _refresh) {
-        return cleanup(1235);
+        return cleanup("1235");
       })
     this.subject = await import('../lib/num_updates.js');
   })

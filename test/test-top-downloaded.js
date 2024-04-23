@@ -8,8 +8,10 @@ mocha.describe('top_downloaded cache hit', function () {
     await td.replaceEsm(
       '../lib/cache.js',
       undefined,
-      async function (_key, _cleanup, _refresh) {
-        return [ { Package: "foo" }, { Package: "bar" } ];
+      async function (_key, cleanup, _refresh) {
+        return cleanup(JSON.stringify(
+          [ { Package: "foo" }, { Package: "bar" } ]
+        ));
       })
     this.subject = await import('../lib/top_downloaded.js');
   })
@@ -33,9 +35,9 @@ mocha.describe('top_downloaded cache miss + refresh', function () {
     await td.replaceEsm(
       '../lib/cache.js',
       undefined,
-      async function (key, _cleanup, refresh) {
+      async function (key, cleanup, refresh) {
         const val = await refresh(key);
-        return val;
+        return cleanup(val);
       })
     this.subject = await import('../lib/top_downloaded.js');
   })
