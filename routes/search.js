@@ -4,22 +4,24 @@ var router = express.Router();
 import urls from '../lib/urls.js';
 import clean_package from '../lib/clean_package.js';
 
-router.get("/search.html", function (req, res, next) {
-	req.query.page = + req.query.page || 1;
-	if (!!req.query['q']) {
-		do_query(req, res, next);
-	} else {
-		show_empty(res, next);
+router.get("/search.html", async function (req, res, next) {
+	try {
+		req.query.page = + req.query.page || 1;
+		if (!!req.query['q']) {
+			await do_query(req, res);
+		} else {
+			show_empty(res, next);
+		}
+	} catch (err) {
+		next(err);
 	}
 })
 
-function do_query(req, res, next) {
-
-	const url = urls["seer"] + '/package/_search';
-
-	var fields = ["Package^10", "Title^5", "Description^2",
+async function do_query(req, res) {
+	const url = urls["seer"] + '/package/_search?size=10&from=' +
+		((req.query['page'] || 1) - 1) * 10;
+	const fields = ["Package^10", "Title^5", "Description^2",
 		"Author^3", "Maintainer^4", "_all"];
-
 	const body = {
 		"query": {
 			"function_score": {
@@ -68,27 +70,18 @@ function do_query(req, res, next) {
 		}
 	};
 
-	request.post(
-		{ url: url, method: 'POST', json: true, body: body },
-		function (error, response, body) {
-			if (error) {
-				next(error);
-			} else {
-				show_results(response.body, req, res);
-			}
-		})
+	const hits = await ky.post(url, { json: body }).json();
+  show_results(hits, req, res);
 }
 
-// Errors here will be caught by the promise, and forwarded to next()
-
 function show_results(resp, req, res) {
-	var hits = resp.hits.hits.map(function (x) {
+	const hits = resp.hits.hits.map(function (x) {
 		x._source = clean_package(x._source);
 		return x;
 	});
-	var no_hits = resp.hits.total;
-	var took = resp.took;
-	var no_pages = Math.min(Math.ceil(no_hits / 10), 10);
+	const no_hits = resp.hits.total;
+	const took = resp.took;
+	const no_pages = Math.min(Math.ceil(no_hits / 10), 10);
 
 	res.render('search', {
 		'q': req.query.q,

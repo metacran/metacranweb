@@ -1,16 +1,16 @@
-<% include header %>
-<% include nav %>
+<%- include('header') %>
+<%- include('nav') %>
 
 <div class="container wide-container">
   <div class="row">
     <div class="col-lg-4">
-      <% include person %>
+      <%- include('person') %>
     </div>
     <div class="col-lg-8">
-      <% include pkglist_result %>
+      <%- include('pkglist_result') %>
     </div>
   </div>
 </div>
 
-<% include links %>
-<% include footer %>
+<%- include('links') %>
+<%- include('footer') %>

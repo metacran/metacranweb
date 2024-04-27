@@ -4,28 +4,21 @@ import ky from 'ky';
 import urls from '../lib/urls.js';
 import clean_package from '../lib/clean_package.js';
 
-router.get('/', function(req, res, next) {
-
-    var url = urls.crandb + '/-/pkgreleases?limit=100&descending=true';
-    request(url, function(error, response, body) {
-	if (error || response.statusCode != 200) {
-	    return next(error || response.statusCode);
+router.get('/', async function (req, res, next) {
+	try {
+		const url = urls.crandb + '/-/pkgreleases?limit=100&descending=true';
+		const body = await ky.get(url).json();
+		const pkgs = body.map(x => x.package);
+		res.render('pkglist', {
+			'pkgs': pkgs.map(clean_package),
+			'title': 'Most recently updated packages',
+			'paging': false,
+			'number': false,
+			'pagetitle': 'Most recent @ METACRAN'
+		});
+	} catch (err) {
+		next(err);
 	}
-        try {
-	    var pkg_array = JSON.parse(body)
-	        .map(function(x) { return x.package; });
-	    res.render(
-	        'pkglist',
-	        { 'pkgs': pkg_array.map(clean_package),
-	          'title': 'Most recently updated packages',
-	          'paging': false,
-	          'number': false,
-	          'pagetitle': 'Most recent @ METACRAN'
-	        });
-        } catch(err) {
-            return next(err);
-        }
-    })
 })
 
 export default router;

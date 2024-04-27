@@ -4,42 +4,26 @@ import ky from 'ky';
 import urls from '../lib/urls.js';
 import clean_package from '../lib/clean_package.js';
 
-router.get('/', function(req, res, next) {
-
-    var url = urls.cranlogs + '/trending';
-    request(url, function(error, response, body) {
-	if (error || response.statusCode != 200) {
-	    return next(error || response.statusCode);
+router.get('/', async function(req, res, next) {
+	try {
+    const url = urls.cranlogs + '/trending';
+		const body = await ky.get(url).json();
+    const pkgnames = body.map(x => '"' + x.package + '"');
+	  const url2 = urls.crandb + '/-/versions?keys=[' + pkgnames.join(',') + ']';
+		const pkgs = await ky.get(url2).json();
+	  const keys = Object.keys(pkgs);
+		var pkg_array = [];
+	  for (const key of keys) { pkg_array.push(pkgs[key]); }
+    res.render('pkglist', {
+			 'pkgs': pkg_array.map(clean_package),
+		   'title': 'Trending packages',
+		   'paging': false,
+		   'number': false,
+		   'pagetitle': 'Trending @ METACRAN'
+		});
+	} catch(err) {
+		next(err);
 	}
-        try {
-	    var pkgnames = JSON.parse(body)
-	        .map(function(x) { return '"' + x.package + '"'; });
-	    var url2 = urls.crandb + '/-/versions?keys=[' + pkgnames.join(',') + ']';
-	    request(url2, function(error, response, body) {
-	        if (error || response.statusCode != 200) {
-		    return next(error || response.statusCode);
-	        }
-                try {
-	            var pkgs = JSON.parse(body);
-	            var keys = Object.keys(pkgs);
-	            var pkg_array = [];
-	            for (k in keys) { pkg_array.push(pkgs[keys[k]]); }
-	            res.render(
-		        'pkglist',
-		        { 'pkgs': pkg_array.map(clean_package),
-		          'title': 'Trending packages',
-		          'paging': false,
-		          'number': false,
-		          'pagetitle': 'Trending @ METACRAN'
-		        });
-                } catch(err) {
-                    return next(err);
-                }
-	    })
-        } catch(err) {
-            return next(err);
-        }
-    })
-})
+});
 
 export default router;
