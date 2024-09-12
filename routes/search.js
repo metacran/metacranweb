@@ -21,6 +21,8 @@ function do_query(req, res, next) {
 		"Author^3", "Maintainer^4", "_all"];
 
 	const body = {
+		"from": (req.query.page - 1) * 10,
+		"size": 10,
 		"query": {
 			"function_score": {
 				"functions": [
