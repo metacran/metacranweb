@@ -84,10 +84,15 @@ function do_query(req, res, next) {
 // Errors here will be caught by the promise, and forwarded to next()
 
 function show_results(resp, req, res) {
-	var hits = resp.hits.hits.map(function (x) {
-		x._source = clean_package(x._source);
-		return x;
-	});
+        var hits;
+        if (resp.hits) {
+	        hits = resp.hits.hits.map(function (x) {
+		        x._source = clean_package(x._source);
+		    return x;
+		});
+	} else {
+	        hits = [];
+	}
 	var no_hits = resp.hits.total;
 	var took = resp.took;
 	var no_pages = Math.min(Math.ceil(no_hits / 10), 10);
