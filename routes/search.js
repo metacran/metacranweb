@@ -85,15 +85,17 @@ function do_query(req, res, next) {
 
 function show_results(resp, req, res) {
         var hits;
+        var no_hits;
         if (resp.hits) {
 	        hits = resp.hits.hits.map(function (x) {
 		        x._source = clean_package(x._source);
 		    return x;
 		});
+                no_hits = resp.hits.total;
 	} else {
 	        hits = [];
+                no_hits = 0;
 	}
-	var no_hits = resp.hits.total;
 	var took = resp.took;
 	var no_pages = Math.min(Math.ceil(no_hits / 10), 10);
 
