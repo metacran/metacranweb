@@ -39,16 +39,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/recent', mostrecent);
-app.use('/trending', trendinglist);
-app.use('/downloaded', downloadlist);
-app.use('/depended', depended);
+//app.use('/recent', mostrecent);
+//app.use('/trending', trendinglist);
+//app.use('/downloaded', downloadlist);
+//app.use('/depended', depended);
 app.use('/badges', badges);
-app.use('/pkglist', pkglist);
-app.use('/pkg', pkg);
-app.use('/maint', maint);
-app.use('/', search);
-app.use('/', routes);
+//app.use('/pkglist', pkglist);
+//app.use('/pkg', pkg);
+//app.use('/maint', maint);
+//app.use('/', search);
+//app.use('/', routes);
 app.use('/check', dokkucheck);
 
 // catch 404 and forward to error handler
