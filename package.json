@@ -14,7 +14,7 @@
     "comma-numbers": "~0.0.2",
     "cookie-parser": "~1.3.3",
     "debug": "^4.1.1",
-    "ejs": "~2.3.1",
+    "ejs": "~3.1.10",
     "express": "^4.17.1",
     "gh-user": "~1.0.0",
     "github-username": "~2.0.0",
