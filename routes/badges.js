@@ -77,19 +77,15 @@ router.get(re_full, function(req, res, next) {
 
 function do_version_badge(res, next, package, query) {
 
-    var url = urls.crandb + '/-/desc?keys=["' + package + '"]';
+    var url = urls.crandb + '/' + package;
     request(url, function(error, response, body) {
 	if (error || response.statusCode != 200) {
 	    return next(error || response.statusCode);
 	}
         try {
 	    var pbody = JSON.parse(body);
-	    var message = "not published";
-	    if (pbody[package]) {
-	        message = pbody[package]["version"] || "not published";
-	    }
+	    var message = pbody["Version"] || "not published";
 	    var svg = make_badge(res, "CRAN", message, query);
-
 	    res.set(200);
 	    res.send(svg);
         } catch(err) {
