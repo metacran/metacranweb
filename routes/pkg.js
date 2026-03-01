@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var get_package = require('../lib/get_package');
+var get_revdeps = require('../lib/get_revdeps');
 var async = require('async');
 var pkg_link = require('../lib/pkg_link');
 var meta = require('metacran-node');
@@ -18,7 +19,9 @@ function do_query(res, next, package) {
     async.parallel(
 	{
 	    'pkg': function(cb) {
-		get_package(package, function(e, r) { cb(e, r)}) }
+		get_package(package, function(e, r) { cb(e, r)}) },
+	    'revdeps': function(cb) {
+		get_revdeps(package, function(e, r) { cb(e, r)}) }
 	},
 	function(err, results) {
 	    if (err) { return next(err) }
