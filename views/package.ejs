@@ -26,6 +26,19 @@
       </div>
 
       <div class="tab-content">
+	<div role="tabpanel" class="tab-pane fade in active" id="README">
+	  <div>
+	    <h1><%= pkg.Title %></h1>
+	    <p class="lead"><%- pkg.Description %></p>
+	    <hr>
+	  </div>
+	  <div id="readme">
+	    <% if (readme) { %>
+	    <%- readme %>
+	    <% } %>
+	  </div>
+	</div>
+
 	<div role="tabpanel" class="tab-pane fade in" id="Manual">
 	  <h1>Reference manual</h1>
 	  <object

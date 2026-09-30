@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var get_package = require('../lib/get_package');
 var get_revdeps = require('../lib/get_revdeps');
+var get_readme = require('../lib/get_readme');
 var async = require('async');
 var pkg_link = require('../lib/pkg_link');
 var meta = require('metacran-node');
@@ -16,12 +17,16 @@ router.get(re_full, function(req, res, next) {
 
 function do_query(res, next, package) {
 
-    async.parallel(
+    async.auto(
 	{
 	    'pkg': function(cb) {
 		get_package(package, function(e, r) { cb(e, r)}) },
 	    'revdeps': function(cb) {
-		get_revdeps(package, function(e, r) { cb(e, r)}) }
+		get_revdeps(package, function(e, r) { cb(e, r)}) },
+	    // A missing README should not break the page
+	    'readme': ['pkg', function(cb, results) {
+		get_readme(results.pkg.Package, results.pkg.Version,
+			   function(e, r) { cb(null, e ? '' : r)}) }]
 	},
 	function(err, results) {
 	    if (err) { return next(err) }
